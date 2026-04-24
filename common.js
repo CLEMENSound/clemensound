@@ -62,6 +62,8 @@ function renderHeader() {
 }
 
 function renderFooter() {
+ // ❗ contact 페이지에서는 footer 숨김
+  if (page === "contact") return;
   const mount = document.querySelector("[data-footer]");
   if (!mount) return;
 

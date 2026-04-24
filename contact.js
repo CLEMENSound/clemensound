@@ -1,4 +1,5 @@
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfZetLAo-CxF4GomR84lqV29321dgakVSU13aqMjaO-1mJ1fW7DXugw5V3H14G9sb-/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby04Xi9LNKGkjG2LQm9UFhEAv6bq3EyEYeoyCbhwD2Sjv1yPeo5bJ53uE3OUXduIAA6/exec";
+
 
 const form = document.querySelector("#contactForm");
 const phoneInput = document.querySelector("#phone");
@@ -75,12 +76,17 @@ async function handleSubmit(event) {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
     form.reset();
+		// 👉 추가 추천 (스크롤 위로 이동)
+		window.scrollTo({ top: 0, behavior: "smooth" });
     submitButton.disabled = true;
     formStatus.textContent = "접수가 완료되었습니다. 확인 후 연락드리겠습니다.";
     formStatus.dataset.state = "success";
+		alert("접수가 완료되었습니다.");
+
   } catch (error) {
     formStatus.textContent = "접수 중 오류가 발생했습니다. 카카오톡 또는 이메일로 문의해 주세요.";
     formStatus.dataset.state = "error";
+		alert("접수 오류입니다. 다시 시도해주세요.");
     submitButton.disabled = !privacyAgree.checked;
     console.error("contact form submit error:", error);
   } finally {
