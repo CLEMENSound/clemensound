@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", () => {
+
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby04Xi9LNKGkjG2LQm9UFhEAv6bq3EyEYeoyCbhwD2Sjv1yPeo5bJ53uE3OUXduIAA6/exec";
 
 const form = document.querySelector("#contactForm");
@@ -156,4 +158,5 @@ closePrivacy.addEventListener("click", () => {
 
 privacyModal.addEventListener("click", (event) => {
   if (event.target === privacyModal) privacyModal.hidden = true;
+});
 });
