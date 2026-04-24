@@ -1146,8 +1146,10 @@ h2 {
   }
 
   .nav-links {
-    display: none;
+    display: flex;
   }
+
+
 
   .hero,
   .profile-hero,
@@ -1390,5 +1392,54 @@ h2 {
   /* ✅ contact form */
   .form-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* 🍔 햄버거 메뉴 CSS */
+.menu-toggle {
+  display: none;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  margin: 5px 0;
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+
+  .site-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 70px);
+
+    background: rgba(0,0,0,0.95);
+    backdrop-filter: blur(20px);
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    transform: translateY(-100%);
+    transition: 0.3s;
+  }
+
+  .nav-links.open {
+    transform: translateY(0);
   }
 }

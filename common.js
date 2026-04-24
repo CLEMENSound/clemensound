@@ -40,23 +40,37 @@ function renderHeader() {
 
   const isHome = page === "home";
   const brandHref = isHome ? "#top" : "index.html";
+
   const nav = navItems
     .map((item) => {
-      const href = isHome && item.href.startsWith("index.html#") ? item.href.replace("index.html", "") : item.href;
-      const current = !isHome && item.key === page ? ' aria-current="page" class="is-active"' : "";
-      return `<a href="${href}" data-nav-key="${item.key}"${current}>${item.label}</a>`;
+      const href = isHome && item.href.startsWith("index.html#")
+        ? item.href.replace("index.html", "")
+        : item.href;
+
+      return `<a href="${href}">${item.label}</a>`;
     })
     .join("");
 
   mount.outerHTML = `
-    <header class="site-header" aria-label="Main navigation">
-      <a class="brand" href="${brandHref}" aria-label="CLEMENSound home">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <span>CLEMENSound</span>
-      </a>
-      <nav class="nav-links" aria-label="Primary navigation">
-        ${nav}
-      </nav>
+    <header class="site-header">
+      <div class="header-inner">
+
+        <a class="brand" href="${brandHref}">
+          <span>CLEMENSound</span>
+        </a>
+
+        <!-- 🍔 햄버거 버튼 추가 -->
+        <button class="menu-toggle" aria-label="메뉴">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="nav-links">
+          ${nav}
+        </nav>
+
+      </div>
     </header>
   `;
 }
@@ -152,3 +166,23 @@ renderFavicon();
 renderHeader();
 renderFooter();
 syncHomeNavigation();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav-links");
+
+  if (!toggle || !nav) return;
+
+  toggle.addEventListener("click", () => {
+    nav.classList.toggle("open");
+    toggle.classList.toggle("active");
+  });
+
+  // 메뉴 클릭 시 닫기
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("open");
+      toggle.classList.remove("active");
+    });
+  });
+});
