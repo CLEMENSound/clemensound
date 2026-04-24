@@ -1274,3 +1274,121 @@ h2 {
     max-width: 180px;
   }
 }
+
+/* =========================
+   ✅ 모바일 반응형 FIX
+========================= */
+
+@media (max-width: 768px) {
+
+  /* ✅ 헤더 */
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 20px;
+  }
+
+  .brand {
+    font-size: 14px;
+  }
+
+  .nav-links {
+    width: 100%;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .nav-links a {
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* ✅ 히어로 영역 */
+  .hero {
+    padding: 100px 20px 20px;
+    min-height: auto;
+  }
+
+  /* ❗ 문제 해결: 텍스트 줄바꿈 */
+  #hero-title {
+    white-space: normal;
+  }
+
+  h1 {
+    font-size: 42px;
+    line-height: 1.1;
+  }
+
+  .hero-copy {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* ✅ 메트릭 (3칸 → 1칸) */
+  .hero-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-metrics div {
+    padding: 14px;
+  }
+
+  /* ✅ 섹션 여백 */
+  .section {
+    padding: 50px 20px;
+  }
+
+  /* ✅ work grid */
+  .work-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* ✅ 서비스 리스트 */
+  .service-list article {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  /* ✅ studio */
+  .studio-section {
+    grid-template-columns: 1fr;
+  }
+
+  /* ✅ footer */
+  .site-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .footer-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  /* ✅ profile */
+  .profile-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-list article {
+    grid-template-columns: 1fr;
+  }
+
+  /* ✅ portfolio */
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* ✅ equipment */
+  .equipment-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* ✅ contact form */
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
