@@ -1,0 +1,131 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: #0a0a0a;
+  color: #fff;
+}
+
+/* 헤더 */
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  border-bottom: 1px solid #222;
+}
+
+.logo {
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #ccc;
+}
+
+.nav a:hover {
+  color: #fff;
+}
+
+/* 히어로 */
+.hero {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 10%;
+  background: linear-gradient(black, #111);
+}
+
+.hero h1 {
+  font-size: 48px;
+}
+
+.hero p {
+  margin-top: 10px;
+  color: #aaa;
+}
+
+/* 공통 섹션 */
+.section {
+  padding: 80px 10%;
+}
+
+.section h2 {
+  margin-bottom: 40px;
+}
+
+/* 서비스 */
+.services {
+  display: flex;
+  gap: 20px;
+}
+
+.card {
+  flex: 1;
+  min-width: 250px;
+  padding: 40px;
+  background: #111;
+  border: 1px solid #222;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.card:hover {
+  background: #1a1a1a;
+}
+
+/* 포트폴리오 */
+.portfolio {
+  display: flex;
+  gap: 20px;
+}
+
+.portfolio img {
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #222;
+}
+
+/* 푸터 */
+footer {
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid #222;
+  color: #777;
+}
+
+/* ✅ 반응형 */
+@media (max-width: 768px) {
+
+  header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav {
+    margin-top: 10px;
+  }
+
+  .services {
+    flex-direction: column;
+  }
+
+  .portfolio {
+    flex-direction: column;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+  }
+
+  .section {
+    padding: 40px 20px;
+  }
+}
