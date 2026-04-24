@@ -1,4 +1,4 @@
-const GOOGLE_SCRIPT_URL = "PASTE_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfZetLAo-CxF4GomR84lqV29321dgakVSU13aqMjaO-1mJ1fW7DXugw5V3H14G9sb-/exec";
 
 const form = document.querySelector("#contactForm");
 const phoneInput = document.querySelector("#phone");
