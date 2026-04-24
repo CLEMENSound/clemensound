@@ -102,6 +102,24 @@ privacyAgree.addEventListener("change", () => {
   submitButton.disabled = !privacyAgree.checked;
 });
 
+// 주소 input 클릭 시 자동 검색
+const addressInput = document.querySelector("#address");
+let addressOpened = false;
+
+function safeOpenAddress() {
+  if (addressOpened) return;
+  addressOpened = true;
+
+  openAddressSearch();
+
+  setTimeout(() => {
+    addressOpened = false;
+  }, 1000);
+}
+
+addressInput.addEventListener("click", openAddressSearch);
+addressInput.addEventListener("focus", openAddressSearch);
+addressInput.addEventListener("touchstart", openAddressSearch);
 findAddress.addEventListener("click", openAddressSearch);
 form.addEventListener("submit", handleSubmit);
 
