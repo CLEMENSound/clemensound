@@ -1,56 +1,136 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clemensound</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CLEMENSound 클레멘사운드</title>
+    <meta
+      name="description"
+      content="CLEMENSound는 소규모 행사, 공연, 성당 및 야외 결혼식, 음향 시스템 설치와 오퍼레이팅, 기존 설치 음향 점검과 컨설팅을 제공합니다."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="home" data-footer-title="행사 일정, 장소, 필요한 내용을 알려주세요.">
+    <div data-header></div>
 
-<body>
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <canvas id="soundCanvas" class="sound-canvas" aria-hidden="true"></canvas>
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-inner">
+          <p class="eyebrow">Sound System Installation · Operation · Inspection</p>
+          <h1 id="hero-title">CLEMENSound</h1>
+          <p class="hero-copy">
+            소규모 행사, 공연, 종교행사, 성당 및 야외 결혼식에 필요한 음향 시스템을 설치하고 현장에서 안정적으로 운영합니다.<br/>
+						이미 설치된 음향 장비의 점검, 수정, 컨설팅까지 현장 상황에 맞춰 현실적인 해결책을 제안합니다.
+          </p>
+        </div>
+        <div class="hero-metrics" aria-label="Service highlights">
+          <div>
+            <strong>설치 Installation</strong>
+            <span>장소와 목적에 맞는 장비 구성 및 설치</span>
+          </div>
+          <div>
+            <strong>운영 Operation</strong>
+            <span>리허설부터 본 행사까지</span>
+          </div>
+          <div>
+            <strong>점검 Inspection</strong>
+            <span>기존 음향 시스템 점검 및 개선</span>
+          </div>
+        </div>
+      </section>
 
-<header>
-  <div class="logo">CLEMENSound</div>
-  <nav class="nav">
-    <a href="#services">서비스</a>
-    <a href="#portfolio">포트폴리오</a>
-    <a href="#contact">문의</a>
-  </nav>
-</header>
+      <section id="work" class="section work-section" aria-labelledby="work-title">
+        <div class="section-heading">
+          <p class="eyebrow">Field Support</p>
+          <h2 id="work-title">현장 시설 상관없이 자체 장비를 사용하여 필요한 음향 시스템을 정확하게 준비하고 운영합니다</h2>
+        </div>
+        <div class="work-grid">
+          <article class="work-card">
+            <div class="track-visual calm" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <h3>소규모 행사</h3>
+            <p>강연, 기업 종교 행사, 발표회, 이벤트 등 모임에 맞는 스피커와 마이크 구성을 준비합니다.</p>
+          </article>
+          <article class="work-card">
+            <div class="track-visual pulse" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <h3>소규모 공연 및 종교 행사</h3>
+            <p>보컬, 악기, 사회자, 찬양팀 등 현장 인원과 공간에 맞춰 안정적인 믹스를 운영합니다.</p>
+          </article>
+          <article class="work-card">
+            <div class="track-visual bright" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <h3>성당 및 야외 결혼식</h3>
+            <p>식전 음악, 행진, 축가, 사회 진행까지 끊김 없이 들리도록 동선과 장비를 세팅합니다.</p>
+          </article>
+        </div>
+      </section>
 
-<section class="hero">
-  <h1>Professional Sound Solution</h1>
-  <p>세팅 · 점검 · 컨설팅</p>
-</section>
+      <section id="services" class="section services-section" aria-labelledby="services-title">
+        <div class="section-heading narrow">
+          <p class="eyebrow">Services</p>
+          <h2 id="services-title">설치부터 운영, 점검과 컨설팅까지</h2>
+        </div>
+        <div class="service-list">
+          <article>
+            <span>01</span>
+            <h3>음향 시스템 설치</h3>
+            <p>행사 규모, 장소 구조, 전원 환경, 마이크 수량에 맞춰 필요한 장비를 구성합니다.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>현장 오퍼레이팅</h3>
+            <p>리허설부터 본 행사까지 마이크, 음원, 연주, 진행 상황을 실시간으로 운용합니다.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>점검 · 수정 · 컨설팅</h3>
+            <p>기존 설치 음향의 노이즈, 하울링, 출력 불균형, 배선 문제를 확인하고 개선 방향을 제안합니다.</p>
+          </article>
+        </div>
+      </section>
 
-<section id="services" class="section">
-  <h2>서비스</h2>
-  <div class="services">
-    <div class="card">음향 세팅</div>
-    <div class="card">시스템 점검</div>
-    <div class="card">컨설팅</div>
-  </div>
-</section>
+      <section id="studio" class="studio-section" aria-labelledby="studio-title">
+        <div class="studio-copy">
+          <p class="eyebrow">System Checkup</p>
+          <h2 id="studio-title">이미 설치된 음향도 다시 좋아질 수 있습니다</h2>
+          <p>
+            성당, 공연장, 카페, 교육장처럼 이미 장비가 있는 공간은 작은 배선 문제나 설정값만으로도
+            소리가 크게 달라집니다. CLEMENSound는 현장의 장비 상태와 사용 방식을 함께 확인하고,
+            지금 가진 시스템 안에서 먼저 개선할 수 있는 방법을 찾고 해결책을 제시합니다.
+          </p>
+        </div>
+        <div class="console-panel" aria-label="Audio console preview">
+          <div class="console-top">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="knob-row">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="meter">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <div class="faders">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </section>
+    </main>
 
-<section id="portfolio" class="section">
-  <h2>포트폴리오</h2>
-  <div class="portfolio">
-    <img src="">
-    <img src="">
-    <img src="">
-  </div>
-</section>
+    <div data-footer></div>
 
-<section id="contact" class="section">
-  <h2>문의</h2>
-  <p>전화: 010-3210-8314</p>
-  <p>이메일: clemensound@naver.com</p>
-</section>
-
-<footer>
-  <p>© 2026 CLEMENSound</p>
-</footer>
-
-<script src="script.js"></script>
-</body>
+    <script src="common.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>

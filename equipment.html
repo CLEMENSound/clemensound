@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Equipment · CLEMENSound</title>
+    <meta
+      name="description"
+      content="CLEMENSound 보유 장비 리스트 페이지입니다. 스피커, 믹서, 마이크, 케이블과 현장 운영 장비를 정리합니다."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="equipment" data-footer-title="필요한 장비 구성과 현장 조건을 알려주세요.">
+    <div data-header></div>
+
+    <main class="equipment-page">
+      <section class="equipment-hero" aria-labelledby="equipment-title">
+        <p class="eyebrow">Equipment List</p>
+        <h1 id="equipment-title">보유 장비 리스트</h1>
+        <p>
+          현장 규모와 목적에 맞춰 운용 가능한 음향 장비를 안내합니다.<br />
+          모델명, 수량, 용도는 업데이트중 입니다.
+        </p>
+      </section>
+
+      <section class="equipment-section" aria-labelledby="system-title">
+        <div class="profile-section-heading">
+          <p class="eyebrow">Speaker System</p>
+          <h2 id="system-title">스피커 시스템</h2>
+        </div>
+        <div class="equipment-table" aria-label="스피커 시스템 보유 장비 리스트">
+          <div class="equipment-row equipment-head">
+            <span>사진</span>
+            <span>모델</span>
+            <span>기본 스펙</span>
+            <span>수량</span>
+          </div>
+          <article class="equipment-row">
+            <button class="equipment-photo" type="button" data-preview-src="assets/images/equipment/JBL_PRX915.webp" data-preview-title="JBL PRX915">
+              <img src="assets/images/equipment/JBL_PRX915.webp" alt="" onerror="this.remove()" />
+            </button>
+            <h3>JBL PRX915</h3>
+            <p>15인치 액티브 스피커, 2000W, 행사/공연 메인 출력용</p>
+            <strong>2대</strong>
+          </article>
+          <!-- <article class="equipment-row">
+            <button class="equipment-photo" type="button" data-preview-src="assets/images/equipment/subwoofer-placeholder.jpg" data-preview-title="서브우퍼 모델명">
+              <img src="assets/images/equipment/subwoofer-placeholder.jpg" alt="" onerror="this.remove()" />
+            </button>
+            <h3>서브우퍼 모델명</h3>
+            <p>15인치 또는 18인치 서브우퍼, 저역 보강용</p>
+            <strong>1대</strong>
+          </article> -->
+          <article class="equipment-row">
+            <button class="equipment-photo" type="button" data-preview-src="assets/images/equipment/monitor-placeholder.jpg" data-preview-title="모니터 스피커 모델명">
+              <img src="assets/images/equipment/monitor-placeholder.jpg" alt="" onerror="this.remove()" />
+            </button>
+            <h3>모니터 스피커 모델명</h3>
+            <p>스테이지 모니터링용, 소규모 공연 및 종교행사용</p>
+            <strong>2대</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="equipment-section" aria-labelledby="detail-title">
+        <div class="profile-section-heading">
+          <p class="eyebrow">Mixer System</p>
+          <h2 id="detail-title">믹서 시스템</h2>
+        </div>
+        <div class="equipment-table" aria-label="믹서 시스템 보유 장비 리스트">
+          <div class="equipment-row equipment-head">
+            <span>사진</span>
+            <span>모델</span>
+            <span>기본 스펙</span>
+            <span>수량</span>
+          </div>
+          <article class="equipment-row">
+            <button class="equipment-photo" type="button" data-preview-src="assets/images/equipment/mixer-placeholder.jpg" data-preview-title="믹서 모델명">
+              <img src="assets/images/equipment/mixer-placeholder.jpg" alt="" onerror="this.remove()" />
+            </button>
+            <h3>믹서 모델명</h3>
+            <p>예: 디지털 믹서, 16채널 입력, 무선 제어 가능</p>
+            <strong>1대</strong>
+          </article>
+          <article class="equipment-row">
+            <button class="equipment-photo" type="button" data-preview-src="assets/images/equipment/interface-placeholder.jpg" data-preview-title="오디오 인터페이스 모델명">
+              <img src="assets/images/equipment/interface-placeholder.jpg" alt="" onerror="this.remove()" />
+            </button>
+            <h3>오디오 인터페이스 모델명</h3>
+            <p>예: 2입력/2출력, 재생 및 녹음 보조용</p>
+            <strong>1대</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="equipment-section" aria-labelledby="microphone-title">
+        <div class="profile-section-heading">
+          <p class="eyebrow">Microphone System</p>
+          <h2 id="microphone-title">마이크 시스템</h2>
+        </div>
+        <div class="equipment-table" aria-label="마이크 시스템 보유 장비 리스트">
+          <div class="equipment-row equipment-head">
+            <span>사진</span>
+            <span>모델</span>
+            <span>기본 스펙</span>
+            <span>수량</span>
+          </div>
+          <article class="equipment-row">
+            <button class="equipment-photo" type="button" data-preview-src="assets/images/equipment/wireless-mic-placeholder.jpg" data-preview-title="무선 마이크 모델명">
+              <img src="assets/images/equipment/wireless-mic-placeholder.jpg" alt="" onerror="this.remove()" />
+            </button>
+            <h3>무선 마이크 모델명</h3>
+            <p>예: 핸드헬드 무선 마이크, 사회자/보컬용</p>
+            <strong>2대</strong>
+          </article>
+          <article class="equipment-row">
+            <button class="equipment-photo" type="button" data-preview-src="assets/images/equipment/wired-mic-placeholder.jpg" data-preview-title="유선 마이크 모델명">
+              <img src="assets/images/equipment/wired-mic-placeholder.jpg" alt="" onerror="this.remove()" />
+            </button>
+            <h3>유선 마이크 모델명</h3>
+            <p>예: 다이내믹 마이크, 보컬/악기/스피치용</p>
+            <strong>4대</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="equipment-section" aria-labelledby="accessory-title">
+        <div class="profile-section-heading">
+          <p class="eyebrow">Cables & Accessories</p>
+          <h2 id="accessory-title">케이블 및 주변장비</h2>
+        </div>
+        <div class="equipment-table" aria-label="케이블 및 주변장비 보유 리스트">
+          <div class="equipment-row equipment-head">
+            <span>사진</span>
+            <span>모델</span>
+            <span>기본 스펙</span>
+            <span>수량</span>
+          </div>
+          <article class="equipment-row">
+            <button class="equipment-photo" type="button" data-preview-src="assets/images/equipment/cable-placeholder.jpg" data-preview-title="XLR 케이블">
+              <img src="assets/images/equipment/cable-placeholder.jpg" alt="" onerror="this.remove()" />
+            </button>
+            <h3>XLR 케이블</h3>
+            <p>예: 마이크/스피커 신호 연결용, 길이별 보유</p>
+            <strong>여러 개</strong>
+          </article>
+          <article class="equipment-row">
+            <button class="equipment-photo" type="button" data-preview-src="assets/images/equipment/stand-placeholder.jpg" data-preview-title="스탠드류">
+              <img src="assets/images/equipment/stand-placeholder.jpg" alt="" onerror="this.remove()" />
+            </button>
+            <h3>스탠드류</h3>
+            <p>예: 스피커 스탠드, 마이크 스탠드, 보면대 등</p>
+            <strong>여러 개</strong>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <div data-footer></div>
+    <script src="common.js"></script>
+    <script src="equipment.js"></script>
+  </body>
+</html>
