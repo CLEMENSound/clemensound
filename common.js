@@ -3,7 +3,7 @@ const footerTitle =
   document.body.dataset.footerTitle || "행사 일정, 장소, 필요한 내용을 알려주세요.";
 const contactEmail = "clemensound@naver.com";
 const kakaoTalkUrl = "https://open.kakao.com/o/REPLACE_WITH_YOUR_LINK";
-const instagramUrl = "https://www.instagram.com/REPLACE_WITH_YOUR_ID";
+const instagramUrl = "https://www.instagram.com/clemensound";
 const faviconHref = "assets/icons/favicon_BK_512.png";
 const brandLogoHref = "assets/images/CLEMENSound-Logo.jpg";
 
