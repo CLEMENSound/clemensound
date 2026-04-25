@@ -113,6 +113,12 @@ async function handleSubmit(event) {
 
   try {
     const payload = await buildPayload();
+    console.log("contact form upload fields:", {
+      fileName: payload.file_name || "",
+      fileType: payload.file_type || "",
+      fileBase64Length: payload.file ? payload.file.length : 0,
+    });
+
     const payloadWithoutFile = { ...payload };
     delete payloadWithoutFile.file;
 

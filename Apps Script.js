@@ -4,6 +4,14 @@ const NOTIFY_EMAIL = "clemensound@naver.com";
 const SCRIPT_VERSION = "forms-file-upload-v4-20260425";
 
 function parseRequestData(e) {
+  if (e.parameter && Object.keys(e.parameter).length > 0) {
+    if (e.parameter.payload) {
+      const payload = JSON.parse(e.parameter.payload);
+      return Object.assign({}, e.parameter, payload);
+    }
+    return e.parameter;
+  }
+
   if (!e || !e.postData || !e.postData.contents) {
     throw new Error("No data received");
   }
@@ -14,15 +22,7 @@ function parseRequestData(e) {
     const parsed = JSON.parse(raw);
     if (parsed && typeof parsed === "object") return parsed;
   } catch (error) {
-    // Fall through to parameter/urlencoded parsing below.
-  }
-
-  if (e.parameter && Object.keys(e.parameter).length > 0) {
-    if (e.parameter.payload) {
-      const payload = JSON.parse(e.parameter.payload);
-      return Object.assign({}, e.parameter, payload);
-    }
-    return e.parameter;
+    // Fall through to urlencoded parsing below.
   }
 
   const formData = raw.split("&").reduce(function (data, pair) {
@@ -44,9 +44,19 @@ function parseRequestData(e) {
 }
 
 function uploadAttachment(data) {
-  if (!data.file_name) return "";
-  if (!data.file) {
+  const hasFileName = Boolean(data.file_name);
+  const hasFileData = Boolean(data.file);
+
+  if (!hasFileName && !hasFileData) {
+    return "";
+  }
+
+  if (hasFileName && !hasFileData) {
     throw new Error("Attachment file data missing");
+  }
+
+  if (!hasFileName && hasFileData) {
+    throw new Error("Attachment file name missing");
   }
 
   const decodedBytes = Utilities.base64Decode(data.file);
@@ -74,6 +84,29 @@ function jsonResponse(payload) {
   return ContentService
     .createTextOutput(JSON.stringify(payload))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+function doGet() {
+  return jsonResponse({
+    result: "ok",
+    script_version: SCRIPT_VERSION,
+    folder_id: DRIVE_FOLDER_ID
+  });
+}
+
+function testDriveUpload() {
+  const folder = DriveApp.getFolderById(DRIVE_FOLDER_ID);
+  const file = folder.createFile(
+    Utilities.newBlob(
+      "CLEMENSound upload test " + new Date().toISOString(),
+      "text/plain",
+      "clemensound-upload-test.txt"
+    )
+  );
+
+  file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+  Logger.log(file.getUrl());
+  return file.getUrl();
 }
 
 function doPost(e) {
