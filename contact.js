@@ -3,10 +3,66 @@ document.addEventListener("DOMContentLoaded", () => {
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyDrSbSNWlFIeDeGaSPAxvLbfuhcR5q1Bd5G1tgVBtNZsbuTPRT8ZrFnFLUrkbTieHh/exec";
 
   const form = document.querySelector("#contactForm");
+  const phoneInput = document.querySelector("#phone");
+  const privacyAgree = document.querySelector("#privacyAgree");
   const submitButton = document.querySelector(".submit-button");
   const loadingMessage = document.querySelector("#loading-message");
   const formStatus = document.querySelector("#formStatus");
+  const privacyModal = document.querySelector("#privacy-modal");
+  const viewPrivacy = document.querySelector("#viewPrivacy");
+  const closePrivacy = document.querySelector(".close");
+  const addressInput = document.querySelector("#address");
 
+  /* =========================
+     📞 전화번호 자동 포맷
+  ========================= */
+  function formatPhone(value) {
+    const digits = value.replace(/\D/g, "").slice(0, 11);
+    if (digits.length >= 8) return digits.replace(/(\d{3})(\d{4})(\d{0,4})/, "$1-$2-$3");
+    if (digits.length >= 4) return digits.replace(/(\d{3})(\d{0,4})/, "$1-$2");
+    return digits;
+  }
+
+  /* =========================
+     📍 주소 검색
+  ========================= */
+  function openAddressSearch() {
+    if (!window.daum?.Postcode) {
+      alert("주소 검색을 불러오지 못했습니다.");
+      return;
+    }
+
+    new window.daum.Postcode({
+      oncomplete(data) {
+        let fullAddress = data.roadAddress || data.jibunAddress;
+        const extras = [data.bname, data.buildingName].filter(Boolean).join(", ");
+        if (extras) fullAddress += ` (${extras})`;
+
+        addressInput.value = fullAddress;
+        document.querySelector("#address_detail").focus();
+      },
+    }).open();
+  }
+
+  /* =========================
+     🚫 중복 실행 방지
+  ========================= */
+  let isOpening = false;
+
+  function safeOpenAddress() {
+    if (isOpening) return;
+    isOpening = true;
+
+    openAddressSearch();
+
+    setTimeout(() => {
+      isOpening = false;
+    }, 500);
+  }
+
+  /* =========================
+     📁 파일 → Base64 변환
+  ========================= */
   function toBase64(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -16,29 +72,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* =========================
+     📦 데이터 구성 (완전)
+  ========================= */
   async function buildPayload() {
+    const formData = new FormData(form);
     const obj = {};
 
-    obj.name = document.querySelector("#name")?.value || "";
-    obj.phone = document.querySelector("#phone")?.value || "";
-    obj.email = document.querySelector("#email")?.value || "";
-    obj.request_type = document.querySelector("#request_type")?.value || "";
-    obj.event_date = document.querySelector("#event_date")?.value || "";
-    obj.venue_type = document.querySelector("#venue_type")?.value || "";
-    obj.audience_count = document.querySelector("#audience_count")?.value || "";
-    obj.address = document.querySelector("#address")?.value || "";
-    obj.address_detail = document.querySelector("#address_detail")?.value || "";
-    obj.mic_count = document.querySelector("#mic_count")?.value || "";
-    obj.has_system = document.querySelector("#has_system")?.value || "";
-    obj.message = document.querySelector("#message")?.value || "";
+    // 기본 값
+    formData.forEach((value, key) => {
+      if (key !== "attachment") {
+        obj[key] = value;
+      }
+    });
 
-    const needs = document.querySelectorAll('input[name="needs"]:checked');
-    obj.needs = Array.from(needs).map(n => n.value).join(", ");
+    // 체크박스 처리
+    obj.needs = formData.getAll("needs").join(", ");
 
-    const file = document.querySelector("#attachment")?.files[0];
+    obj.created_at = new Date().toISOString();
 
-    if (file) {
+    // 파일 처리
+    const file = formData.get("attachment");
+
+    if (file && file.size > 0) {
       const base64 = await toBase64(file);
+
       obj.file = base64.split(",")[1];
       obj.file_name = file.name;
       obj.file_type = file.type;
@@ -47,37 +105,92 @@ document.addEventListener("DOMContentLoaded", () => {
     return obj;
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  /* =========================
+     📩 폼 제출
+  ========================= */
+  async function handleSubmit(event) {
+    event.preventDefault();
 
     loadingMessage.hidden = false;
     submitButton.disabled = true;
+    formStatus.textContent = "";
 
     try {
       const payload = await buildPayload();
 
-      console.log("🔥 payload:", payload); // 디버깅
+const response = await fetch(GOOGLE_SCRIPT_URL, {
+  method: "POST",
+  body: JSON.stringify(payload),
+});
 
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors", // 🔥 핵심
-        body: JSON.stringify(payload),
-      });
+if (!response.ok) {
+  throw new Error("네트워크 오류: " + response.status);
+}
 
-      // no-cors는 응답 못 읽음 → 성공 처리
+let result;
+
+try {
+  result = await response.json();
+} catch (e) {
+  throw new Error("서버 응답이 JSON이 아님");
+}
+
+if (result.result !== "success") {
+  throw new Error(result.error || "서버 처리 실패");
+}
+
       form.reset();
 
-      alert("접수 완료");
+      window.scrollTo({ top: 0, behavior: "smooth" });
 
-    } catch (err) {
-      alert("오류: " + err.message);
-      console.error(err);
-    } finally {
+      formStatus.textContent = "접수가 완료되었습니다.";
+      formStatus.dataset.state = "success";
+
+      alert("접수가 완료되었습니다.");
+
+    }
+		
+catch (error) {
+  console.error("🔥 에러:", error);
+
+  alert("접수 실패 원인:\n" + error.message);
+
+  formStatus.textContent = "접수 실패: " + error.message;
+  formStatus.dataset.state = "error";
+
+  submitButton.disabled = !privacyAgree.checked;
+    }
+		finally {
       loadingMessage.hidden = true;
-      submitButton.disabled = false;
     }
   }
 
+  /* =========================
+     🎯 이벤트 연결
+  ========================= */
+
+  phoneInput.addEventListener("input", (e) => {
+    e.target.value = formatPhone(e.target.value);
+  });
+
+  privacyAgree.addEventListener("change", () => {
+    submitButton.disabled = !privacyAgree.checked;
+  });
+
+  addressInput.addEventListener("click", safeOpenAddress);
+
   form.addEventListener("submit", handleSubmit);
+
+  viewPrivacy.addEventListener("click", () => {
+    privacyModal.hidden = false;
+  });
+
+  closePrivacy.addEventListener("click", () => {
+    privacyModal.hidden = true;
+  });
+
+  privacyModal.addEventListener("click", (e) => {
+    if (e.target === privacyModal) privacyModal.hidden = true;
+  });
 
 });
