@@ -97,9 +97,6 @@ async function handleSubmit(event) {
   try {
 const response = await fetch(GOOGLE_SCRIPT_URL, {
   method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
   body: JSON.stringify(Object.fromEntries(await buildPayload())),
 });
 
@@ -113,7 +110,7 @@ const response = await fetch(GOOGLE_SCRIPT_URL, {
     formStatus.textContent = "접수가 완료되었습니다. 확인 후 연락드리겠습니다.";
     formStatus.dataset.state = "success";
 
-    alert("접수가 완료되었습니다.");
+		window.location.href = "thanks.html";
 
   } catch (error) {
     formStatus.textContent = "접수 중 오류가 발생했습니다. 카카오톡 또는 이메일로 문의해 주세요.";
