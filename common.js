@@ -75,8 +75,6 @@ function renderHeader() {
 }
 
 function renderFooter() {
-  if (page === "contact") return;
-
   const mount = document.querySelector("[data-footer]");
   if (!mount) return;
 
