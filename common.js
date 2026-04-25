@@ -6,6 +6,7 @@ const kakaoTalkUrl = "https://open.kakao.com/o/REPLACE_WITH_YOUR_LINK";
 const faviconHref = "assets/icons/favicon_BK_512.png";
 
 const navItems = [
+  { key: "home", label: "홈", href: "index.html" },
   { key: "services", label: "서비스", href: "index.html#work" },
   { key: "profile", label: "프로필", href: "profile.html" },
   { key: "equipment", label: "보유 장비", href: "equipment.html" },
@@ -45,6 +46,8 @@ function renderHeader() {
     .map((item) => {
       const href = isHome && item.href.startsWith("index.html#")
         ? item.href.replace("index.html", "")
+        : isHome && item.href === "index.html"
+          ? "#top"
         : item.href;
       const isActive = page === item.key;
       const activeAttrs = isActive ? ' aria-current="page" class="is-active"' : "";
@@ -75,6 +78,8 @@ function renderHeader() {
 }
 
 function renderFooter() {
+  if (page === "contact" || page === "thanks") return;
+
   const mount = document.querySelector("[data-footer]");
   if (!mount) return;
 

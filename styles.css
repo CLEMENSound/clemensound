@@ -1,7 +1,7 @@
 :root {
   color-scheme: dark;
   --font-main: "Century Gothic", "HY태백", "HYTaebaek", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
-  --hero-height: 58vh;
+  --hero-height: 46vh;
   --bg: #030303;
   --panel: #0d0e10;
   --panel-2: #14161a;
@@ -42,7 +42,7 @@ a {
 .site-header {
   position: fixed;
   inset: 0 0 auto;
-  z-index: 20;
+  z-index: 100;
   width: 100%;
   min-height: 86px;
   display: flex;
@@ -107,7 +107,7 @@ a {
   display: grid;
   align-items: end;
   overflow: hidden;
-  padding: 128px clamp(20px, 5vw, 72px) 34px;
+  padding: 118px clamp(20px, 5vw, 72px) 30px;
   border-bottom: 1px solid var(--line);
   background-color: #030303;
   background-image:
@@ -148,7 +148,7 @@ a {
   position: relative;
   z-index: 1;
   width: min(900px, 100%);
-  padding-bottom: clamp(52px, 8vh, 88px);
+  padding-bottom: clamp(32px, 6vh, 62px);
 }
 
 .eyebrow {
@@ -514,7 +514,7 @@ h2 {
   gap: clamp(28px, 6vw, 84px);
   align-items: center;
   min-height: var(--hero-height);
-  padding: clamp(80px, 11vw, 140px) clamp(20px, 5vw, 72px);
+  padding: clamp(58px, 8vw, 96px) clamp(20px, 5vw, 72px);
   border-bottom: 1px solid var(--line);
   background:
     radial-gradient(circle at 78% 34%, rgba(215, 180, 106, 0.16), transparent 30%),
@@ -621,7 +621,7 @@ h2 {
 
 .portfolio-hero {
   min-height: var(--hero-height);
-  padding: clamp(80px, 11vw, 140px) clamp(20px, 5vw, 72px);
+  padding: clamp(58px, 8vw, 96px) clamp(20px, 5vw, 72px);
   border-bottom: 1px solid var(--line);
   background:
     radial-gradient(circle at 72% 28%, rgba(119, 215, 213, 0.12), transparent 30%),
@@ -723,7 +723,7 @@ h2 {
 
 .equipment-hero {
   min-height: var(--hero-height);
-  padding: clamp(80px, 11vw, 140px) clamp(20px, 5vw, 72px);
+  padding: clamp(58px, 8vw, 96px) clamp(20px, 5vw, 72px);
   border-bottom: 1px solid var(--line);
   background:
     radial-gradient(circle at 78% 26%, rgba(215, 180, 106, 0.14), transparent 30%),
@@ -904,7 +904,7 @@ h2 {
 
 .contact-hero {
   min-height: var(--hero-height);
-  padding: clamp(80px, 11vw, 140px) clamp(20px, 5vw, 72px);
+  padding: clamp(58px, 8vw, 96px) clamp(20px, 5vw, 72px);
   border-bottom: 1px solid var(--line);
   background:
     radial-gradient(circle at 74% 30%, rgba(119, 215, 213, 0.12), transparent 30%),
@@ -1493,6 +1493,7 @@ body {
   .site-header {
     min-height: 70px;
     padding: 13px 18px;
+    z-index: 200;
   }
 
   .header-inner {
@@ -1509,8 +1510,14 @@ body {
   }
 
   .nav-links {
+    position: fixed;
     top: 70px;
+    left: 0;
+    z-index: 190;
+    display: flex;
+    width: 100%;
     height: calc(100vh - 70px);
+    height: calc(100dvh - 70px);
     margin: 0;
     padding: 28px 20px 40px;
     background: rgba(3, 3, 3, 0.97);
@@ -1519,6 +1526,8 @@ body {
     gap: 0;
     transform: translateY(-100%);
     transition: transform 0.28s ease;
+    visibility: hidden;
+    opacity: 0;
     pointer-events: none;
     border-top: 1px solid var(--line);
     overflow-y: auto;
@@ -1537,6 +1546,8 @@ body {
 
   .nav-links.open {
     transform: translateY(0);
+    visibility: visible;
+    opacity: 1;
     pointer-events: auto;
   }
 
@@ -1564,7 +1575,7 @@ body {
   .equipment-hero,
   .contact-hero {
     min-height: auto;
-    padding: 104px 20px 42px;
+    padding: 86px 20px 34px;
   }
 
   .hero-inner {
