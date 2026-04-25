@@ -23,15 +23,21 @@ function parseRequestData(e) {
     return e.parameter;
   }
 
-  return raw.split("&").reduce(function (data, pair) {
+  const formData = raw.split("&").reduce(function (data, pair) {
     const parts = pair.split("=");
     if (!parts[0]) return data;
 
     const key = decodeURIComponent(parts[0].replace(/\+/g, " "));
-    const value = decodeURIComponent((parts[1] || "").replace(/\+/g, " "));
+    const value = decodeURIComponent(parts.slice(1).join("=").replace(/\+/g, " "));
     data[key] = value;
     return data;
   }, {});
+
+  if (formData.payload) {
+    return JSON.parse(formData.payload);
+  }
+
+  return formData;
 }
 
 function uploadAttachment(data) {
