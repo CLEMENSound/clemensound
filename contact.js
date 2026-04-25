@@ -64,7 +64,19 @@ function safeOpenAddress() {
 /* =========================
    📦 데이터 구성
 ========================= */
-function buildPayload() {
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = String(reader.result || "");
+      resolve(result.includes(",") ? result.split(",")[1] : result);
+    };
+    reader.onerror = () => reject(reader.error || new Error("File read failed"));
+    reader.readAsDataURL(file);
+  });
+}
+
+async function buildPayload() {
   const formData = new FormData(form);
 
   const selectedNeeds = formData.getAll("needs").join(", ");
@@ -74,13 +86,18 @@ function buildPayload() {
   formData.set("created_at", new Date().toISOString());
 
   const attachment = formData.get("attachment");
+  formData.delete("attachment");
+
   if (attachment && attachment.name) {
     formData.set("attachment_name", attachment.name);
+    formData.set("file", await fileToBase64(attachment));
+    formData.set("file_name", attachment.name);
+    formData.set("file_type", attachment.type || "application/octet-stream");
   } else {
     formData.set("attachment_name", "");
   }
 
-  return formData;
+  return Object.fromEntries(formData.entries());
 }
 
 /* =========================
@@ -95,12 +112,17 @@ async function handleSubmit(event) {
   formStatus.removeAttribute("data-state");
 
   try {
-const response = await fetch(GOOGLE_SCRIPT_URL, {
-  method: "POST",
-  body: JSON.stringify(Object.fromEntries(await buildPayload())),
-});
+    const response = await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      body: JSON.stringify(await buildPayload()),
+    });
 
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+    const result = await response.json();
+    if (result.result !== "success") {
+      throw new Error(result.error || "Submit failed");
+    }
 
     form.reset();
 

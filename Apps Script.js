@@ -61,6 +61,8 @@ function doPost(e) {
       fileUrl = file.getUrl();
     }
 
+    data.attachment_name = fileUrl || data.attachment_name || "";
+
     // =========================
     // 📊 4. 시트 저장
     // =========================
@@ -79,7 +81,7 @@ function doPost(e) {
       data.has_system || "",
       data.needs || "",
       data.message || "",
-      fileUrl
+      data.attachment_name
     ]);
 
     // =========================

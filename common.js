@@ -46,38 +46,37 @@ function renderHeader() {
       const href = isHome && item.href.startsWith("index.html#")
         ? item.href.replace("index.html", "")
         : item.href;
+      const isActive = page === item.key;
+      const activeAttrs = isActive ? ' aria-current="page" class="is-active"' : "";
 
-      return `<a href="${href}">${item.label}</a>`;
+      return `<a href="${href}" data-nav-key="${item.key}"${activeAttrs}>${item.label}</a>`;
     })
     .join("");
 
   mount.outerHTML = `
     <header class="site-header">
       <div class="header-inner">
-
         <a class="brand" href="${brandHref}">
           <span>CLEMENSound</span>
         </a>
 
-        <!-- 🍔 햄버거 버튼 추가 -->
-        <button class="menu-toggle" aria-label="메뉴">
+        <button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="site-navigation">
           <span></span>
           <span></span>
           <span></span>
         </button>
 
-        <nav class="nav-links">
+        <nav id="site-navigation" class="nav-links" aria-label="주요 메뉴">
           ${nav}
         </nav>
-
       </div>
     </header>
   `;
 }
 
 function renderFooter() {
- // ❗ contact 페이지에서는 footer 숨김
   if (page === "contact") return;
+
   const mount = document.querySelector("[data-footer]");
   if (!mount) return;
 
@@ -162,27 +161,39 @@ function syncHomeNavigation() {
   sections.forEach((section) => observer.observe(section.element));
 }
 
-renderFavicon();
-renderHeader();
-renderFooter();
-syncHomeNavigation();
-
-document.addEventListener("DOMContentLoaded", () => {
+function setupMobileNavigation() {
   const toggle = document.querySelector(".menu-toggle");
   const nav = document.querySelector(".nav-links");
 
   if (!toggle || !nav) return;
 
+  const setMenuOpen = (isOpen) => {
+    nav.classList.toggle("open", isOpen);
+    toggle.classList.toggle("active", isOpen);
+    toggle.setAttribute("aria-expanded", String(isOpen));
+    toggle.setAttribute("aria-label", isOpen ? "메뉴 닫기" : "메뉴 열기");
+    document.body.classList.toggle("menu-open", isOpen);
+  };
+
   toggle.addEventListener("click", () => {
-    nav.classList.toggle("open");
-    toggle.classList.toggle("active");
+    setMenuOpen(!nav.classList.contains("open"));
   });
 
-  // 메뉴 클릭 시 닫기
-  document.querySelectorAll(".nav-links a").forEach(link => {
-    link.addEventListener("click", () => {
-      nav.classList.remove("open");
-      toggle.classList.remove("active");
-    });
+  document.querySelectorAll(".nav-links a").forEach((link) => {
+    link.addEventListener("click", () => setMenuOpen(false));
   });
-});
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setMenuOpen(false);
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) setMenuOpen(false);
+  });
+}
+
+renderFavicon();
+renderHeader();
+renderFooter();
+syncHomeNavigation();
+setupMobileNavigation();
