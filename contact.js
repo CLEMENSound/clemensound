@@ -115,6 +115,9 @@ async function handleSubmit(event) {
     const payload = await buildPayload();
     const body = new URLSearchParams();
     body.set("payload", JSON.stringify(payload));
+    Object.entries(payload).forEach(([key, value]) => {
+      body.set(key, value == null ? "" : String(value));
+    });
 
     const response = await fetch(GOOGLE_SCRIPT_URL, {
       method: "POST",
