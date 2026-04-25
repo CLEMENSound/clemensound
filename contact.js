@@ -113,8 +113,11 @@ async function handleSubmit(event) {
 
   try {
     const payload = await buildPayload();
+    const payloadWithoutFile = { ...payload };
+    delete payloadWithoutFile.file;
+
     const body = new URLSearchParams();
-    body.set("payload", JSON.stringify(payload));
+    body.set("payload", JSON.stringify(payloadWithoutFile));
     Object.entries(payload).forEach(([key, value]) => {
       body.set(key, value == null ? "" : String(value));
     });

@@ -1,7 +1,7 @@
 const SHEET_NAME = "Sheet1";
 const DRIVE_FOLDER_ID = "1XT-w5OcueQxoR9XJz8iq5GTcc1DyyMcc";
 const NOTIFY_EMAIL = "clemensound@naver.com";
-const SCRIPT_VERSION = "forms-payload-v3-20260425";
+const SCRIPT_VERSION = "forms-file-upload-v4-20260425";
 
 function parseRequestData(e) {
   if (!e || !e.postData || !e.postData.contents) {
@@ -19,7 +19,8 @@ function parseRequestData(e) {
 
   if (e.parameter && Object.keys(e.parameter).length > 0) {
     if (e.parameter.payload) {
-      return JSON.parse(e.parameter.payload);
+      const payload = JSON.parse(e.parameter.payload);
+      return Object.assign({}, e.parameter, payload);
     }
     return e.parameter;
   }
@@ -35,14 +36,18 @@ function parseRequestData(e) {
   }, {});
 
   if (formData.payload) {
-    return JSON.parse(formData.payload);
+    const payload = JSON.parse(formData.payload);
+    return Object.assign({}, formData, payload);
   }
 
   return formData;
 }
 
 function uploadAttachment(data) {
-  if (!data.file || !data.file_name) return "";
+  if (!data.file_name) return "";
+  if (!data.file) {
+    throw new Error("Attachment file data missing");
+  }
 
   const decodedBytes = Utilities.base64Decode(data.file);
   if (decodedBytes.length > 10 * 1024 * 1024) {
