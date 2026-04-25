@@ -3,6 +3,7 @@ const footerTitle =
   document.body.dataset.footerTitle || "행사 일정, 장소, 필요한 내용을 알려주세요.";
 const contactEmail = "clemensound@naver.com";
 const kakaoTalkUrl = "https://open.kakao.com/o/REPLACE_WITH_YOUR_LINK";
+const instagramUrl = "https://www.instagram.com/REPLACE_WITH_YOUR_ID";
 const faviconHref = "assets/icons/favicon_BK_512.png";
 const brandLogoHref = "assets/images/CLEMENSound-Logo.jpg";
 
@@ -92,6 +93,13 @@ function renderFooter() {
         <h2>${footerTitle}</h2>
       </div>
       <div class="footer-actions">
+        <a class="social-link instagram" href="${instagramUrl}" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect x="4" y="4" width="16" height="16" rx="5"></rect>
+            <circle cx="12" cy="12" r="3.5"></circle>
+            <circle cx="16.6" cy="7.4" r="1"></circle>
+          </svg>
+        </a>
         <a class="button kakao" href="${kakaoTalkUrl}" target="_blank" rel="noopener">카카오톡 문의</a>
         <a class="button primary" href="contact.html">문의 접수하기</a>
       </div>

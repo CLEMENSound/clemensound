@@ -1,10 +1,10 @@
 const SHEET_NAME = "Sheet1";
-const DRIVE_FOLDER_ID = "1XT-w5OcueQxoR9XJz8iq5GTcc1DyyMcc";
+const DRIVE_UPLOAD_FOLDER_URL = "https://drive.google.com/drive/folders/1XT-w5OcueQxoR9XJz8iq5GTcc1DyyMcc";
 const NOTIFY_EMAIL = "clemensound@naver.com";
-const SCRIPT_VERSION = "forms-file-upload-v4-20260425";
+const SCRIPT_VERSION = "direct-drive-upload-v1-20260425";
 
 function parseRequestData(e) {
-  if (e.parameter && Object.keys(e.parameter).length > 0) {
+  if (e && e.parameter && Object.keys(e.parameter).length > 0) {
     if (e.parameter.payload) {
       const payload = JSON.parse(e.parameter.payload);
       return Object.assign({}, e.parameter, payload);
@@ -43,43 +43,6 @@ function parseRequestData(e) {
   return formData;
 }
 
-function uploadAttachment(data) {
-  const hasFileName = Boolean(data.file_name);
-  const hasFileData = Boolean(data.file);
-
-  if (!hasFileName && !hasFileData) {
-    return "";
-  }
-
-  if (hasFileName && !hasFileData) {
-    throw new Error("Attachment file data missing");
-  }
-
-  if (!hasFileName && hasFileData) {
-    throw new Error("Attachment file name missing");
-  }
-
-  const decodedBytes = Utilities.base64Decode(data.file);
-  if (decodedBytes.length > 10 * 1024 * 1024) {
-    throw new Error("File size exceeds 10MB");
-  }
-
-  const blob = Utilities.newBlob(
-    decodedBytes,
-    data.file_type || "application/octet-stream",
-    data.file_name
-  );
-
-  const folder = DriveApp.getFolderById(DRIVE_FOLDER_ID);
-  const safeName = String(data.name || "unknown").replace(/[\\/:*?"<>|]/g, "_");
-  const file = folder.createFile(blob).setName(
-    safeName + "_" + new Date().getTime() + "_" + data.file_name
-  );
-
-  file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
-  return file.getUrl();
-}
-
 function jsonResponse(payload) {
   return ContentService
     .createTextOutput(JSON.stringify(payload))
@@ -90,23 +53,8 @@ function doGet() {
   return jsonResponse({
     result: "ok",
     script_version: SCRIPT_VERSION,
-    folder_id: DRIVE_FOLDER_ID
+    drive_upload_folder_url: DRIVE_UPLOAD_FOLDER_URL
   });
-}
-
-function testDriveUpload() {
-  const folder = DriveApp.getFolderById(DRIVE_FOLDER_ID);
-  const file = folder.createFile(
-    Utilities.newBlob(
-      "CLEMENSound upload test " + new Date().toISOString(),
-      "text/plain",
-      "clemensound-upload-test.txt"
-    )
-  );
-
-  file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
-  Logger.log(file.getUrl());
-  return file.getUrl();
 }
 
 function doPost(e) {
@@ -120,8 +68,7 @@ function doPost(e) {
       "email",
       "request_type",
       "venue_type",
-      "message",
-      "file"
+      "message"
     ].some(function (key) {
       return data[key];
     });
@@ -138,8 +85,7 @@ function doPost(e) {
       throw new Error("Sheet not found: " + SHEET_NAME);
     }
 
-    const fileUrl = uploadAttachment(data);
-    data.attachment_name = fileUrl || data.attachment_name || "";
+    data.attachment_name = DRIVE_UPLOAD_FOLDER_URL;
 
     sheet.appendRow([
       data.created_at ? new Date(data.created_at) : new Date(),
@@ -173,7 +119,7 @@ function doPost(e) {
         "행사/방문 희망일: " + (data.event_date || "") + "\n" +
         "주소: " + (data.address || "") + "\n\n" +
         "내용:\n" + (data.message || "") + "\n\n" +
-        (data.attachment_name ? "첨부 파일: " + data.attachment_name : "")
+        "고객 직접 업로드 폴더: " + DRIVE_UPLOAD_FOLDER_URL
     });
 
     return jsonResponse({

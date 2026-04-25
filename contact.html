@@ -136,10 +136,20 @@
               <textarea id="message" name="message" rows="6" placeholder="행사 순서, 필요한 장비, 현재 문제 증상 등을 적어주세요." required></textarea>
             </label>
 
-            <label for="attachment">
-              참고 사진 / 자료
-              <input type="file" id="attachment" name="attachment" accept="image/*,.pdf" />
-            </label>
+            <div class="upload-link-box">
+              <div>
+                <strong>참고 사진 / 자료</strong>
+                <p>파일은 접수 완료 전후로 Google Drive 폴더에 직접 업로드해 주세요.</p>
+              </div>
+              <a
+                class="button secondary"
+                href="https://drive.google.com/drive/folders/1XT-w5OcueQxoR9XJz8iq5GTcc1DyyMcc"
+                target="_blank"
+                rel="noopener"
+              >
+                Drive 폴더 열기
+              </a>
+            </div>
 
             <div class="privacy-box">
               <label for="privacyAgree">
@@ -177,6 +187,6 @@
     <div data-footer></div>
     <script src="common.js"></script>
     <script src="script.js"></script>
-    <script src="contact.js?v=20260425-forms-6"></script>
+    <script src="contact.js?v=20260425-forms-7"></script>
   </body>
 </html>

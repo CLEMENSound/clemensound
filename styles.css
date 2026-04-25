@@ -498,7 +498,28 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
+  align-items: center;
   gap: 10px;
+}
+
+.social-link {
+  display: inline-grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(5, 5, 5, 0.18);
+  border-radius: 6px;
+  background: #050505;
+  color: var(--text);
+}
+
+.social-link svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
 }
 
 .button.kakao {
@@ -676,6 +697,25 @@ h2 {
   background: var(--panel);
 }
 
+main img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.work-card img,
+.portfolio-card img,
+.profile-panel img {
+  display: block;
+  width: 100%;
+  max-height: 520px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #08090a;
+}
+
 .portfolio-visual {
   min-height: 150px;
   margin-bottom: auto;
@@ -800,7 +840,8 @@ h2 {
   display: grid;
   place-items: center;
   width: 100%;
-  aspect-ratio: 1;
+  min-height: 220px;
+  aspect-ratio: 1 / 1;
   padding: 0;
   overflow: hidden;
   border: 1px solid var(--line);
@@ -1059,6 +1100,29 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.04);
+}
+
+.upload-link-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.upload-link-box strong {
+  display: block;
+  color: var(--white-soft);
+  font-weight: 800;
+}
+
+.upload-link-box p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  line-height: 1.55;
 }
 
 #viewPrivacy {
@@ -1647,7 +1711,8 @@ body {
   }
 
   .address-row,
-  .privacy-box {
+  .privacy-box,
+  .upload-link-box {
     display: grid;
     grid-template-columns: 1fr;
   }
@@ -1677,6 +1742,7 @@ body {
 
   .footer-actions {
     display: grid;
+    grid-template-columns: 46px 1fr;
   }
 }
 

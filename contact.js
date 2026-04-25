@@ -64,19 +64,7 @@ function safeOpenAddress() {
 /* =========================
    📦 데이터 구성
 ========================= */
-function fileToBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const result = String(reader.result || "");
-      resolve(result.includes(",") ? result.split(",")[1] : result);
-    };
-    reader.onerror = () => reject(reader.error || new Error("File read failed"));
-    reader.readAsDataURL(file);
-  });
-}
-
-async function buildPayload() {
+function buildPayload() {
   const formData = new FormData(form);
 
   const selectedNeeds = formData.getAll("needs").join(", ");
@@ -84,18 +72,7 @@ async function buildPayload() {
   formData.set("needs", selectedNeeds);
 
   formData.set("created_at", new Date().toISOString());
-
-  const attachment = formData.get("attachment");
-  formData.delete("attachment");
-
-  if (attachment && attachment.name) {
-    formData.set("attachment_name", attachment.name);
-    formData.set("file", await fileToBase64(attachment));
-    formData.set("file_name", attachment.name);
-    formData.set("file_type", attachment.type || "application/octet-stream");
-  } else {
-    formData.set("attachment_name", "");
-  }
+  formData.set("attachment_name", "");
 
   return Object.fromEntries(formData.entries());
 }
@@ -112,18 +89,9 @@ async function handleSubmit(event) {
   formStatus.removeAttribute("data-state");
 
   try {
-    const payload = await buildPayload();
-    console.log("contact form upload fields:", {
-      fileName: payload.file_name || "",
-      fileType: payload.file_type || "",
-      fileBase64Length: payload.file ? payload.file.length : 0,
-    });
-
-    const payloadWithoutFile = { ...payload };
-    delete payloadWithoutFile.file;
-
+    const payload = buildPayload();
     const body = new URLSearchParams();
-    body.set("payload", JSON.stringify(payloadWithoutFile));
+    body.set("payload", JSON.stringify(payload));
     Object.entries(payload).forEach(([key, value]) => {
       body.set(key, value == null ? "" : String(value));
     });
