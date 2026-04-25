@@ -124,6 +124,8 @@ async function handleSubmit(event) {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
     const result = await response.json();
+    console.log("contact form response:", result);
+
     if (result.result !== "success") {
       throw new Error(result.error || "Submit failed");
     }

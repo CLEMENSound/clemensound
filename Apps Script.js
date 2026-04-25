@@ -1,6 +1,7 @@
 const SHEET_NAME = "Sheet1";
 const DRIVE_FOLDER_ID = "1XT-w5OcueQxoR9XJz8iq5GTcc1DyyMcc";
 const NOTIFY_EMAIL = "clemensound@naver.com";
+const SCRIPT_VERSION = "forms-payload-v3-20260425";
 
 function parseRequestData(e) {
   if (!e || !e.postData || !e.postData.contents) {
@@ -139,6 +140,7 @@ function doPost(e) {
 
     return jsonResponse({
       result: "success",
+      script_version: SCRIPT_VERSION,
       attachment_name: data.attachment_name
     });
   } catch (error) {
@@ -146,6 +148,7 @@ function doPost(e) {
 
     return jsonResponse({
       result: "error",
+      script_version: SCRIPT_VERSION,
       error: error.message
     });
   }
