@@ -95,10 +95,13 @@ async function handleSubmit(event) {
   formStatus.removeAttribute("data-state");
 
   try {
-    const response = await fetch(GOOGLE_SCRIPT_URL, {
-      method: "POST",
-      body: buildPayload(),
-    });
+const response = await fetch(GOOGLE_SCRIPT_URL, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(Object.fromEntries(await buildPayload())),
+});
 
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
