@@ -75,6 +75,13 @@ a {
   white-space: nowrap;
 }
 
+.brand img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
 /* .brand-mark {
   width: 26px;
   height: 26px;
@@ -509,6 +516,8 @@ h2 {
 }
 
 .profile-hero {
+  position: relative;
+  overflow: hidden;
   min-height: var(--hero-height);
   padding: clamp(58px, 8vw, 96px) clamp(20px, 5vw, 72px);
   border-bottom: 1px solid var(--line);
@@ -518,11 +527,15 @@ h2 {
 }
 
 .profile-hero h1 {
+  position: relative;
+  z-index: 1;
   max-width: 980px;
   font-size: clamp(48px, 8vw, 118px);
 }
 
 .profile-hero p {
+  position: relative;
+  z-index: 1;
   max-width: 760px;
   color: var(--white-soft);
   font-size: clamp(18px, 2vw, 23px);
@@ -616,6 +629,8 @@ h2 {
 }
 
 .portfolio-hero {
+  position: relative;
+  overflow: hidden;
   min-height: var(--hero-height);
   padding: clamp(58px, 8vw, 96px) clamp(20px, 5vw, 72px);
   border-bottom: 1px solid var(--line);
@@ -625,11 +640,15 @@ h2 {
 }
 
 .portfolio-hero h1 {
+  position: relative;
+  z-index: 1;
   max-width: 980px;
   font-size: clamp(48px, 8vw, 118px);
 }
 
 .portfolio-hero p {
+  position: relative;
+  z-index: 1;
   max-width: 740px;
   color: var(--white-soft);
   font-size: clamp(18px, 2vw, 23px);
@@ -718,6 +737,8 @@ h2 {
 }
 
 .equipment-hero {
+  position: relative;
+  overflow: hidden;
   min-height: var(--hero-height);
   padding: clamp(58px, 8vw, 96px) clamp(20px, 5vw, 72px);
   border-bottom: 1px solid var(--line);
@@ -727,11 +748,15 @@ h2 {
 }
 
 .equipment-hero h1 {
+  position: relative;
+  z-index: 1;
   max-width: 980px;
   font-size: clamp(48px, 8vw, 118px);
 }
 
 .equipment-hero p {
+  position: relative;
+  z-index: 1;
   max-width: 760px;
   color: var(--white-soft);
   font-size: clamp(18px, 2vw, 23px);
@@ -899,6 +924,8 @@ h2 {
 }
 
 .contact-hero {
+  position: relative;
+  overflow: hidden;
   min-height: var(--hero-height);
   padding: clamp(58px, 8vw, 96px) clamp(20px, 5vw, 72px);
   border-bottom: 1px solid var(--line);
@@ -908,11 +935,15 @@ h2 {
 }
 
 .contact-hero h1 {
+  position: relative;
+  z-index: 1;
   max-width: 980px;
   font-size: clamp(48px, 8vw, 118px);
 }
 
 .contact-hero p {
+  position: relative;
+  z-index: 1;
   max-width: 760px;
   color: var(--white-soft);
   font-size: clamp(18px, 2vw, 23px);

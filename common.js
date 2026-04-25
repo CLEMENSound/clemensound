@@ -4,10 +4,10 @@ const footerTitle =
 const contactEmail = "clemensound@naver.com";
 const kakaoTalkUrl = "https://open.kakao.com/o/REPLACE_WITH_YOUR_LINK";
 const faviconHref = "assets/icons/favicon_BK_512.png";
+const brandLogoHref = "assets/images/CLEMENSound-Logo.jpg";
 
 const navItems = [
   { key: "home", label: "홈", href: "index.html" },
-  { key: "services", label: "서비스", href: "index.html#work" },
   { key: "profile", label: "프로필", href: "profile.html" },
   { key: "equipment", label: "보유 장비", href: "equipment.html" },
   { key: "portfolio", label: "포트폴리오", href: "portfolio.html" },
@@ -15,9 +15,10 @@ const navItems = [
 ];
 
 const homeSections = [
-  { key: "services", id: "work" },
-  { key: "services", id: "services" },
-  { key: "services", id: "studio" },
+  { key: "home", id: "top" },
+  { key: "home", id: "work" },
+  { key: "home", id: "services" },
+  { key: "home", id: "studio" },
 ];
 
 function renderFavicon() {
@@ -60,7 +61,8 @@ function renderHeader() {
     <header class="site-header">
       <div class="header-inner">
         <a class="brand" href="${brandHref}">
-          <span>CLEMENSound</span>
+          <img src="${brandLogoHref}" alt="" aria-hidden="true" />
+          <span>CLEMEMSound</span>
         </a>
 
         <button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="site-navigation">
