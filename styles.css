@@ -748,11 +748,8 @@ h2 {
 
 .equipment-row {
   display: grid;
-  grid-template-columns: 160px minmax(160px, 0.8fr) minmax(240px, 1.5fr) 90px;
-  gap: 20px;
+  grid-template-columns: 80px 1fr 1fr 1fr 2fr 80px;
   align-items: center;
-  padding: 18px;
-  border-bottom: 1px solid var(--line);
 }
 
 .equipment-row:last-child {
