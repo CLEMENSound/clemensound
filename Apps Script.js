@@ -8,8 +8,16 @@ function doPost(e) {
       throw new Error("No data received");
     }
 
-    const data = JSON.parse(e.postData.contents);
+    let data;
 
+    try {
+      data = JSON.parse(e.postData.contents);
+    } catch (e) {
+      // 👉 JSON 아니면 fallback
+      data = e.parameter;
+    }
+    Logger.log(data);
+    
     // =========================
     // 📌 2. 시트 가져오기
     // =========================
