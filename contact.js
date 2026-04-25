@@ -118,15 +118,29 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const payload = await buildPayload();
 
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+const response = await fetch(GOOGLE_SCRIPT_URL, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(payload),
+});
 
-      if (!response.ok) throw new Error();
+if (!response.ok) {
+  throw new Error("네트워크 오류: " + response.status);
+}
+
+let result;
+
+try {
+  result = await response.json();
+} catch (e) {
+  throw new Error("서버 응답이 JSON이 아님");
+}
+
+if (result.result !== "success") {
+  throw new Error(result.error || "서버 처리 실패");
+}
 
       form.reset();
 
@@ -137,16 +151,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
       alert("접수가 완료되었습니다.");
 
-    } catch (error) {
-      formStatus.textContent = "접수 실패. 다시 시도해주세요.";
-      formStatus.dataset.state = "error";
+    }
+		
+catch (error) {
+  console.error("🔥 에러:", error);
 
-      alert("접수 오류입니다.");
+  alert("접수 실패 원인:\n" + error.message);
 
-      submitButton.disabled = !privacyAgree.checked;
-      console.error(error);
+  formStatus.textContent = "접수 실패: " + error.message;
+  formStatus.dataset.state = "error";
 
-    } finally {
+  submitButton.disabled = !privacyAgree.checked;
+    }
+		finally {
       loadingMessage.hidden = true;
     }
   }
