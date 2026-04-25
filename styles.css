@@ -748,7 +748,7 @@ h2 {
 
 .equipment-row {
   display: grid;
-  grid-template-columns: 80px 1fr 1fr 1fr 2fr 80px;
+  grid-template-columns: 80px 1fr 1fr 1fr 1fr 1fr 2fr 80px;
   align-items: center;
 }
 
