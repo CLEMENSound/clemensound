@@ -100,7 +100,11 @@ function renderFooter() {
             <circle cx="16.6" cy="7.4" r="1"></circle>
           </svg>
         </a>
-        <a class="button kakao" href="${kakaoTalkUrl}" target="_blank" rel="noopener">카카오톡 문의</a>
+        <a class="social-link kakao" href="${kakaoTalkUrl}" target="_blank" rel="noopener" aria-label="카카오톡 문의">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 4.2c-4.4 0-8 2.8-8 6.3 0 2.2 1.5 4.2 3.8 5.3l-.8 3.4 3.7-2.5c.4.1.9.1 1.3.1 4.4 0 8-2.8 8-6.3s-3.6-6.3-8-6.3Z"></path>
+          </svg>
+        </a>
         <a class="button primary" href="contact.html">문의 접수하기</a>
       </div>
     </footer>

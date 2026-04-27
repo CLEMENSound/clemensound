@@ -12,6 +12,7 @@
   --gold: #d7b46a;
   --red: #d95f50;
   --cyan: #77d7d5;
+  --hero-bg-image: url("assets/images/Saffiano_BG_Garo.webp");
 }
 
 * {
@@ -119,7 +120,7 @@ a {
   background-color: #030303;
   background-image:
     linear-gradient(90deg, rgba(3, 3, 3, 0.9), rgba(3, 3, 3, 0.54)),
-    url("assets/images/Saffiano_BG_Garo.webp");
+    var(--hero-bg-image);
   background-position:
     center,
     top left;
@@ -522,6 +523,19 @@ h2 {
   stroke-width: 1.8;
 }
 
+.social-link.kakao {
+  color: #1f1b00;
+  background: #fee500;
+  border-color: #fee500;
+}
+
+.social-link.kakao svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  stroke: none;
+}
+
 .button.kakao {
   color: #1f1b00;
   background: #fee500;
@@ -542,9 +556,19 @@ h2 {
   min-height: var(--hero-height);
   padding: clamp(58px, 8vw, 96px) clamp(20px, 5vw, 72px);
   border-bottom: 1px solid var(--line);
-  background:
-    radial-gradient(circle at 78% 34%, rgba(215, 180, 106, 0.16), transparent 30%),
-    linear-gradient(135deg, #030303, #101114 74%, #17110b);
+  background-color: #030303;
+  background-image:
+    linear-gradient(90deg, rgba(3, 3, 3, 0.9), rgba(3, 3, 3, 0.54)),
+    var(--hero-bg-image);
+  background-position:
+    center,
+    top left;
+  background-repeat:
+    no-repeat,
+    repeat;
+  background-size:
+    auto,
+    auto;
 }
 
 .profile-hero h1 {
@@ -655,9 +679,19 @@ h2 {
   min-height: var(--hero-height);
   padding: clamp(58px, 8vw, 96px) clamp(20px, 5vw, 72px);
   border-bottom: 1px solid var(--line);
-  background:
-    radial-gradient(circle at 72% 28%, rgba(119, 215, 213, 0.12), transparent 30%),
-    linear-gradient(135deg, #030303, #111316 70%, #160d0b);
+  background-color: #030303;
+  background-image:
+    linear-gradient(90deg, rgba(3, 3, 3, 0.9), rgba(3, 3, 3, 0.54)),
+    var(--hero-bg-image);
+  background-position:
+    center,
+    top left;
+  background-repeat:
+    no-repeat,
+    repeat;
+  background-size:
+    auto,
+    auto;
 }
 
 .portfolio-hero h1 {
@@ -782,9 +816,19 @@ main img {
   min-height: var(--hero-height);
   padding: clamp(58px, 8vw, 96px) clamp(20px, 5vw, 72px);
   border-bottom: 1px solid var(--line);
-  background:
-    radial-gradient(circle at 78% 26%, rgba(215, 180, 106, 0.14), transparent 30%),
-    linear-gradient(135deg, #030303, #101114 72%, #121212);
+  background-color: #030303;
+  background-image:
+    linear-gradient(90deg, rgba(3, 3, 3, 0.9), rgba(3, 3, 3, 0.54)),
+    var(--hero-bg-image);
+  background-position:
+    center,
+    top left;
+  background-repeat:
+    no-repeat,
+    repeat;
+  background-size:
+    auto,
+    auto;
 }
 
 .equipment-hero h1 {
@@ -970,9 +1014,19 @@ main img {
   min-height: var(--hero-height);
   padding: clamp(58px, 8vw, 96px) clamp(20px, 5vw, 72px);
   border-bottom: 1px solid var(--line);
-  background:
-    radial-gradient(circle at 74% 30%, rgba(119, 215, 213, 0.12), transparent 30%),
-    linear-gradient(135deg, #030303, #101114 74%, #17110b);
+  background-color: #030303;
+  background-image:
+    linear-gradient(90deg, rgba(3, 3, 3, 0.9), rgba(3, 3, 3, 0.54)),
+    var(--hero-bg-image);
+  background-position:
+    center,
+    top left;
+  background-repeat:
+    no-repeat,
+    repeat;
+  background-size:
+    auto,
+    auto;
 }
 
 .contact-hero h1 {
