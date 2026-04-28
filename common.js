@@ -209,8 +209,74 @@ function setupMobileNavigation() {
   });
 }
 
+function setupImagePreview() {
+  if (window.imagePreviewReady) return;
+
+  const previewTriggers = document.querySelectorAll("[data-preview-src]");
+  if (!previewTriggers.length) return;
+
+  window.imagePreviewReady = true;
+
+  const previewLayer = document.createElement("div");
+  previewLayer.className = "image-preview-layer";
+  previewLayer.hidden = true;
+  previewLayer.innerHTML = `
+    <div class="image-preview-card">
+      <button class="image-preview-close" type="button" aria-label="닫기">&times;</button>
+      <img alt="" />
+      <p></p>
+    </div>
+  `;
+  document.body.append(previewLayer);
+
+  const previewImage = previewLayer.querySelector("img");
+  const previewTitle = previewLayer.querySelector("p");
+  const closeButton = previewLayer.querySelector(".image-preview-close");
+  let locked = false;
+
+  function openPreview(trigger, lock = false) {
+    const image = trigger.querySelector("img");
+    const src = trigger.dataset.previewSrc || image?.src;
+    if (!src) return;
+
+    locked = lock;
+    previewImage.src = src;
+    previewImage.alt = trigger.dataset.previewTitle || image?.alt || "미리보기 이미지";
+    previewTitle.textContent = trigger.dataset.previewTitle || image?.alt || "";
+    previewLayer.hidden = false;
+    previewLayer.dataset.locked = String(locked);
+  }
+
+  function closePreview(force = false) {
+    if (locked && !force) return;
+    locked = false;
+    previewLayer.hidden = true;
+    previewImage.removeAttribute("src");
+    previewLayer.dataset.locked = "false";
+  }
+
+  previewTriggers.forEach((trigger) => {
+    trigger.addEventListener("mouseenter", () => openPreview(trigger));
+    trigger.addEventListener("mouseleave", () => closePreview());
+    trigger.addEventListener("focus", () => openPreview(trigger));
+    trigger.addEventListener("blur", () => closePreview());
+    trigger.addEventListener("click", () => openPreview(trigger, true));
+  });
+
+  closeButton.addEventListener("click", () => closePreview(true));
+
+  previewLayer.addEventListener("click", (event) => {
+    if (event.target === previewLayer) closePreview(true);
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closePreview(true);
+  });
+}
+
 renderFavicon();
 renderHeader();
 renderFooter();
 syncHomeNavigation();
 setupMobileNavigation();
+setupImagePreview();
