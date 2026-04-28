@@ -2083,8 +2083,26 @@ body {
   }
 
   .footer-actions {
-    display: grid;
-    grid-template-columns: 46px 1fr;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .footer-actions .social-link {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+  }
+
+  .footer-actions .button {
+    width: auto;
+    min-width: 0;
+    flex: 1 1 auto;
+    min-height: 42px;
+    padding: 0 14px;
+    white-space: nowrap;
   }
 }
 
