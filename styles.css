@@ -731,9 +731,64 @@ h2 {
   background: var(--panel);
 }
 
+.record-list {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.record-item {
+  display: grid;
+  grid-template-columns: 400px minmax(180px, 0.85fr) minmax(260px, 1.35fr) minmax(120px, 0.45fr);
+  gap: 28px;
+  align-items: center;
+  padding: 30px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.record-photo {
+  display: grid;
+  place-items: center;
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #08090a;
+}
+
+.record-photo img {
+  display: block;
+  width: 400px;
+  height: 400px;
+  object-fit: contain;
+}
+
+.record-item h3 {
+  margin-bottom: 0;
+  font-size: 24px;
+}
+
+.record-item p {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.72;
+}
+
+.record-item .record-period {
+  color: var(--gold);
+  font-weight: 800;
+}
+
 main img {
   max-width: 100%;
   height: auto;
+  object-fit: contain;
+}
+
+main .record-photo img {
+  width: 400px;
+  height: 400px;
+  max-width: none;
   object-fit: contain;
 }
 
@@ -1346,9 +1401,22 @@ main img {
   .service-list article,
   .profile-list article,
   .case-template article,
+  .record-item,
   .equipment-list article {
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+
+  .record-photo {
+    width: min(400px, 100%);
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  main .record-photo img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
   }
 
   .site-footer {
@@ -1529,6 +1597,11 @@ main img {
 
   .profile-list article {
     grid-template-columns: 1fr;
+  }
+
+  .record-item {
+    grid-template-columns: 1fr;
+    gap: 14px;
   }
 
   /* ✅ portfolio */
@@ -1769,6 +1842,23 @@ body {
   .upload-link-box {
     display: grid;
     grid-template-columns: 1fr;
+  }
+
+  .record-item {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .record-photo {
+    width: min(400px, 100%);
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  main .record-photo img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
   }
 }
 
