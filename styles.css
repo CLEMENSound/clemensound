@@ -809,10 +809,12 @@ h2 {
 
 .record-subphotos {
   display: flex;
+  align-items: center;
   gap: 8px;
   width: 100%;
   max-width: 100%;
-  padding: 0;
+  min-height: 76px;
+  padding: 0 0 8px;
   border: 0;
   border-radius: 8px;
   background: transparent;
@@ -850,10 +852,13 @@ h2 {
 
 .record-subphoto {
   flex: 0 0 68px;
-  display: block;
+  display: grid;
+  place-items: center;
   width: 68px;
+  height: 68px;
   padding: 0;
   border: 0;
+  overflow: hidden;
   border-radius: 6px;
   color: inherit;
   background: transparent;
@@ -914,7 +919,7 @@ main .record-photo > img {
 main .record-subphoto img {
   width: 68px;
   height: 68px;
-  max-width: 100%;
+  max-width: none;
   object-fit: contain;
 }
 
@@ -1557,7 +1562,7 @@ main .record-subphoto img {
   main .record-subphoto img {
     width: 68px;
     height: 68px;
-    max-width: 100%;
+    max-width: none;
   }
 
   .site-footer {
@@ -2023,7 +2028,7 @@ body {
   main .record-subphoto img {
     width: 68px;
     height: 68px;
-    max-width: 100%;
+    max-width: none;
   }
 }
 
