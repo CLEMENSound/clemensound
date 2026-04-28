@@ -807,6 +807,27 @@ h2 {
   background: #08090a;
 }
 
+.record-photo-main {
+  cursor: zoom-in;
+}
+
+.record-photo-main:focus-visible {
+  outline: 2px solid rgba(215, 180, 106, 0.82);
+  outline-offset: 3px;
+}
+
+.record-photo-main > img {
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.record-photo-main:hover > img,
+.record-photo-main:focus-visible > img {
+  opacity: 0.92;
+  transform: scale(1.015);
+}
+
 .record-subphotos {
   display: flex;
   align-items: center;

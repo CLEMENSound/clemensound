@@ -212,6 +212,17 @@ function setupMobileNavigation() {
 function setupImagePreview() {
   if (window.imagePreviewReady) return;
 
+  document.querySelectorAll(".record-photo-main").forEach((trigger) => {
+    const image = trigger.querySelector("img");
+    if (!image) return;
+
+    trigger.dataset.previewSrc = trigger.dataset.previewSrc || image.getAttribute("src") || "";
+    trigger.dataset.previewTitle = trigger.dataset.previewTitle || image.getAttribute("alt") || "";
+    trigger.setAttribute("role", "button");
+    trigger.setAttribute("tabindex", "0");
+    trigger.setAttribute("aria-label", `${trigger.dataset.previewTitle || "이미지"} 크게 보기`);
+  });
+
   const previewTriggers = document.querySelectorAll("[data-preview-src]");
   if (!previewTriggers.length) return;
 
@@ -261,6 +272,11 @@ function setupImagePreview() {
     trigger.addEventListener("focus", () => openPreview(trigger));
     trigger.addEventListener("blur", () => closePreview());
     trigger.addEventListener("click", () => openPreview(trigger, true));
+    trigger.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      openPreview(trigger, true);
+    });
   });
 
   closeButton.addEventListener("click", () => closePreview(true));
