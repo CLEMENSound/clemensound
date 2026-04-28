@@ -523,6 +523,20 @@ h2 {
   stroke-width: 1.8;
 }
 
+.social-link.instagram {
+  color: #fff;
+  background: radial-gradient(circle at 30% 107%, #fdf497 0 8%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+  border-color: transparent;
+}
+
+.social-link.instagram svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+}
+
 .social-link.kakao {
   color: #1f1b00;
   background: #fee500;

@@ -105,7 +105,7 @@ function renderFooter() {
             <path d="M12 4.2c-4.4 0-8 2.8-8 6.3 0 2.2 1.5 4.2 3.8 5.3l-.8 3.4 3.7-2.5c.4.1.9.1 1.3.1 4.4 0 8-2.8 8-6.3s-3.6-6.3-8-6.3Z"></path>
           </svg>
         </a>
-        <a class="button primary" href="contact.html">문의 접수하기</a>
+        <a class="button primary" href="contact.html">문의 접수</a>
       </div>
     </footer>
   `;
