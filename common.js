@@ -244,8 +244,11 @@ function setupImagePreview() {
   const previewTitle = previewLayer.querySelector("p");
   const closeButton = previewLayer.querySelector(".image-preview-close");
   let locked = false;
+  let suppressPreviewUntil = 0;
 
   function openPreview(trigger, lock = false) {
+    if (Date.now() < suppressPreviewUntil) return;
+
     const image = trigger.querySelector("img");
     const src = trigger.dataset.previewSrc || image?.src;
     if (!src) return;
@@ -261,17 +264,34 @@ function setupImagePreview() {
   function closePreview(force = false) {
     if (locked && !force) return;
     locked = false;
+    if (force) suppressPreviewUntil = Date.now() + 350;
     previewLayer.hidden = true;
     previewImage.removeAttribute("src");
     previewLayer.dataset.locked = "false";
   }
 
+  function forceClosePreview(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    closePreview(true);
+  }
+
   previewTriggers.forEach((trigger) => {
-    trigger.addEventListener("mouseenter", () => openPreview(trigger));
-    trigger.addEventListener("mouseleave", () => closePreview());
-    trigger.addEventListener("focus", () => openPreview(trigger));
+    const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    if (supportsHover) {
+      trigger.addEventListener("mouseenter", () => openPreview(trigger));
+      trigger.addEventListener("mouseleave", () => closePreview());
+    }
+
+    trigger.addEventListener("focus", () => {
+      if (supportsHover) openPreview(trigger);
+    });
     trigger.addEventListener("blur", () => closePreview());
-    trigger.addEventListener("click", () => openPreview(trigger, true));
+    trigger.addEventListener("click", (event) => {
+      event.preventDefault();
+      openPreview(trigger, true);
+    });
     trigger.addEventListener("keydown", (event) => {
       if (event.key !== "Enter" && event.key !== " ") return;
       event.preventDefault();
@@ -279,10 +299,20 @@ function setupImagePreview() {
     });
   });
 
-  closeButton.addEventListener("click", () => closePreview(true));
+  closeButton.addEventListener("click", forceClosePreview);
+  closeButton.addEventListener("pointerup", forceClosePreview);
+  closeButton.addEventListener("touchend", forceClosePreview);
 
   previewLayer.addEventListener("click", (event) => {
-    if (event.target === previewLayer) closePreview(true);
+    if (event.target === previewLayer || event.target.closest(".image-preview-card")) {
+      forceClosePreview(event);
+    }
+  });
+
+  previewLayer.addEventListener("pointerup", (event) => {
+    if (event.target === previewLayer || event.target.closest(".image-preview-card")) {
+      forceClosePreview(event);
+    }
   });
 
   window.addEventListener("keydown", (event) => {
