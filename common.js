@@ -6,7 +6,7 @@ const contactEmail = "clemensound@naver.com";
 const kakaoTalkUrl = "https://open.kakao.com/o/REPLACE_WITH_YOUR_LINK";
 const instagramUrl = "https://www.instagram.com/clemensound";
 const faviconHref = "assets/icons/favicon_BK_512.png";
-const brandLogoHref = "assets/images/CLEMENSound-Logo.jpg";
+const brandLogoHref = "assets/images/CLEMENSound-Logo-WH.png";
 const copyrightText = "© 2026 CLEMENSound. All rights reserved.";
 const businessInfo = {
   company: "상호: 클레멘사운드",
@@ -72,7 +72,7 @@ function renderHeader() {
       <div class="header-inner">
         <a class="brand" href="${brandHref}">
           <img src="${brandLogoHref}" alt="" aria-hidden="true" />
-          <span>CLEMEMSound</span>
+          <span>클레멘사운드</span>
         </a>
 
         <button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="site-navigation">
@@ -135,7 +135,7 @@ function renderFooter() {
         <button type="button" class="close" data-privacy-close aria-label="닫기">&times;</button>
         <h2 id="footer-privacy-title">개인정보처리방침</h2>
         <p>
-          CLEMENSound는 문의 확인, 일정 조율, 견적 안내, 서비스 응대를 위해 필요한 최소한의 개인정보를 수집합니다.
+          클레멘사운드는 문의 확인, 일정 조율, 견적 안내, 서비스 응대를 위해 필요한 최소한의 개인정보를 수집합니다.
           수집된 정보는 해당 목적 외에는 사용하지 않으며, 이용자는 언제든지 정보 삭제를 요청할 수 있습니다.
         </p>
         <p>
