@@ -1,11 +1,20 @@
 const page = document.body.dataset.page || "home";
 const footerTitle =
   document.body.dataset.footerTitle || "행사 일정, 장소, 필요한 내용을 알려주세요.";
+const pagesWithoutFooterTitle = new Set(["home", "profile", "equipment", "portfolio"]);
 const contactEmail = "clemensound@naver.com";
 const kakaoTalkUrl = "https://open.kakao.com/o/REPLACE_WITH_YOUR_LINK";
 const instagramUrl = "https://www.instagram.com/clemensound";
 const faviconHref = "assets/icons/favicon_BK_512.png";
 const brandLogoHref = "assets/images/CLEMENSound-Logo.jpg";
+const copyrightText = "© 2026 CLEMENSound. All rights reserved.";
+const businessInfo = {
+  company: "상호: 클레멘사운드",
+  owner: "대표: 이기성",
+  address: "소재지: 서울시 금천구 독산로22길 35-14, 201호",
+  customerCenter: `고객센터: 010-3210-8314 / ${contactEmail}`,
+	registration: "사업자등록번호: 123-45-67890",
+};
 
 const navItems = [
   { key: "home", label: "홈", href: "index.html" },
@@ -17,9 +26,9 @@ const navItems = [
 
 const homeSections = [
   { key: "home", id: "top" },
-  { key: "home", id: "work" },
-  { key: "home", id: "services" },
-  { key: "home", id: "studio" },
+  { key: "home", id: "setup-operation" },
+  { key: "home", id: "inspection" },
+  { key: "home", id: "education" }, 
 ];
 
 function renderFavicon() {
@@ -86,11 +95,24 @@ function renderFooter() {
   const mount = document.querySelector("[data-footer]");
   if (!mount) return;
 
+  const footerHeading = pagesWithoutFooterTitle.has(page) ? "" : `<h2>${footerTitle}</h2>`;
+
   mount.outerHTML = `
     <footer id="contact" class="site-footer">
       <div>
         <p class="eyebrow">Contact</p>
-        <h2>${footerTitle}</h2>
+        ${footerHeading}
+        <div class="footer-legal" aria-label="사업자 정보">
+          <span>${businessInfo.company}</span>
+          <span>${businessInfo.owner}</span>
+          <span>${businessInfo.address}</span>
+          <span>${businessInfo.customerCenter}</span>
+					<span>${businessInfo.registration}</span>
+        </div>
+        <div class="footer-meta">
+          <button class="footer-privacy" type="button" data-privacy-open>개인정보처리방침</button>
+          <span>${copyrightText}</span>
+        </div>
       </div>
       <div class="footer-actions">
         <a class="social-link instagram" href="${instagramUrl}" target="_blank" rel="noopener" aria-label="Instagram">
@@ -108,7 +130,49 @@ function renderFooter() {
         <a class="button primary" href="contact.html">문의 접수</a>
       </div>
     </footer>
+    <div id="footer-privacy-modal" class="modal" hidden>
+      <div class="modal-content footer-privacy-content" role="dialog" aria-modal="true" aria-labelledby="footer-privacy-title">
+        <button type="button" class="close" data-privacy-close aria-label="닫기">&times;</button>
+        <h2 id="footer-privacy-title">개인정보처리방침</h2>
+        <p>
+          CLEMENSound는 문의 확인, 일정 조율, 견적 안내, 서비스 응대를 위해 필요한 최소한의 개인정보를 수집합니다.
+          수집된 정보는 해당 목적 외에는 사용하지 않으며, 이용자는 언제든지 정보 삭제를 요청할 수 있습니다.
+        </p>
+        <p>
+          수집 항목: 이름, 연락처, 이메일, 행사 정보, 문의 내용<br />
+          이용 목적: 문의 응대, 일정 확인, 견적 및 서비스 안내<br />
+          보유 기간: 처리 목적 달성 후 지체 없이 파기합니다.
+        </p>
+      </div>
+    </div>
   `;
+}
+
+function setupFooterPrivacyModal() {
+  const modal = document.getElementById("footer-privacy-modal");
+  const openButton = document.querySelector("[data-privacy-open]");
+  const closeButton = document.querySelector("[data-privacy-close]");
+
+  if (!modal || !openButton || !closeButton) return;
+
+  const openModal = () => {
+    modal.hidden = false;
+    closeButton.focus();
+  };
+
+  const closeModal = () => {
+    modal.hidden = true;
+    openButton.focus();
+  };
+
+  openButton.addEventListener("click", openModal);
+  closeButton.addEventListener("click", closeModal);
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) closeModal();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !modal.hidden) closeModal();
+  });
 }
 
 function setActiveNav(key) {
@@ -326,3 +390,4 @@ renderFooter();
 syncHomeNavigation();
 setupMobileNavigation();
 setupImagePreview();
+setupFooterPrivacyModal();

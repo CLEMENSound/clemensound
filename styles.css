@@ -155,14 +155,14 @@ a {
 .hero-inner {
   position: relative;
   z-index: 1;
-  width: min(900px, 100%);
+  width: min(1180px, 100%);
   padding-bottom: clamp(32px, 6vh, 62px);
 }
 
 .eyebrow {
   margin: 0 0 16px;
   color: var(--gold);
-  font-size: 12px;
+  font-size: 20px;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -201,7 +201,7 @@ p,
 }
 
 .hero-copy {
-  width: min(690px, 100%);
+  width: min(1180px, 100%);
   color: var(--white-soft);
   font-size: clamp(18px, 2vw, 24px);
   line-height: 1.62;
@@ -245,9 +245,9 @@ p,
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1px;
-  width: min(760px, 100%);
+  width: min(1040px, 100%);
   background: var(--line);
   border: 1px solid var(--line);
 }
@@ -290,10 +290,25 @@ p,
   max-width: 760px;
 }
 
+.section-lead {
+  width: min(520px, 100%);
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
 h2 {
   margin-bottom: 0;
-  font-size: clamp(34px, 5vw, 70px);
+  font-size: clamp(34px, 5vw, 45px);
   line-height: 1;
+}
+
+.section-title-eyebrow {
+  margin-bottom: 22px;
+  color: var(--gold);
+  font-weight: 800;
+  letter-spacing: 0.06em;
 }
 
 .work-grid {
@@ -305,7 +320,7 @@ h2 {
 }
 
 .work-card {
-  min-height: 430px;
+  min-height: 360px;
   padding: 28px;
   display: flex;
   flex-direction: column;
@@ -338,6 +353,7 @@ h2 {
 .track-visual.calm { color: var(--gold); }
 .track-visual.pulse { color: var(--red); }
 .track-visual.bright { color: var(--cyan); }
+.track-visual.learn { color: var(--white-soft); }
 
 .work-card h3,
 .service-list h3 {
@@ -375,6 +391,65 @@ h2 {
   font-weight: 800;
 }
 
+.education-section {
+  background:
+    linear-gradient(135deg, rgba(119, 215, 213, 0.08), transparent 34%),
+    #030303;
+  border-bottom: 1px solid var(--line);
+}
+
+.setup-operation-section {
+  border-bottom: 1px solid var(--line);
+}
+
+.education-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 42px;
+  border: 1px solid var(--line);
+  background: var(--line);
+}
+
+.education-card {
+  min-height: 300px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 42%),
+    var(--panel);
+}
+
+.education-card span {
+  width: fit-content;
+  margin-bottom: auto;
+  padding: 8px 10px;
+  border: 1px solid rgba(215, 180, 106, 0.34);
+  border-radius: 6px;
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.education-card h3 {
+  margin: 34px 0 12px;
+  font-size: 24px;
+}
+
+.education-card p {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.74;
+}
+
+.inspection-section {
+  border-bottom: 1px solid var(--line);
+  background: #08090a;
+}
+
 .studio-section {
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.72fr);
@@ -385,6 +460,47 @@ h2 {
 
 .studio-copy {
   max-width: 760px;
+}
+
+.studio-copy .section-description {
+  font-size: 18px;
+  color: var(--white-soft);
+}
+
+/* .studio-copy .setup-description {
+  font-size: 18px;
+  color: var(--white-soft);
+} */
+
+@media (min-width: 1024px) {
+  .hero-copy,
+  .profile-hero h2,
+  .profile-hero p,
+  .portfolio-hero h2,
+  .portfolio-hero p,
+  .equipment-hero h2,
+  .equipment-hero p,
+  .studio-copy > h2,
+  .studio-copy > p {
+    white-space: nowrap;
+  }
+}
+
+.checkup-list {
+  display: grid;
+  gap: 10px;
+  margin: 26px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.checkup-list li {
+  padding: 16px 16px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--white-soft);
+  background: rgba(255, 255, 255, 0.04);
+  font-weight: 700;
 }
 
 .console-panel {
@@ -486,6 +602,48 @@ h2 {
   max-width: 760px;
   font-size: clamp(20px, 2.6vw, 34px);
   line-height: 1.08;
+}
+
+.footer-legal {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, max-content));
+  gap: 7px 18px;
+  margin-top: 16px;
+  color: rgba(5, 5, 5, 0.72);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+  margin-top: 12px;
+  color: rgba(5, 5, 5, 0.68);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.footer-privacy {
+  padding: 0;
+  border: 0;
+  color: #5d461c;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer-privacy-content {
+  width: min(620px, 100%);
+}
+
+.footer-privacy-content p + p {
+  margin-top: 16px;
 }
 
 .site-footer .button.primary {
@@ -595,7 +753,7 @@ h2 {
 .profile-hero p {
   position: relative;
   z-index: 1;
-  max-width: 760px;
+  max-width: 1180px;
   color: var(--white-soft);
   font-size: clamp(18px, 2vw, 23px);
   line-height: 1.68;
@@ -718,7 +876,7 @@ h2 {
 .portfolio-hero p {
   position: relative;
   z-index: 1;
-  max-width: 740px;
+  max-width: 1180px;
   color: var(--white-soft);
   font-size: clamp(18px, 2vw, 23px);
   line-height: 1.68;
@@ -1062,7 +1220,7 @@ main .record-subphoto img {
 .equipment-hero p {
   position: relative;
   z-index: 1;
-  max-width: 760px;
+  max-width: 1180px;
   color: var(--white-soft);
   font-size: clamp(18px, 2vw, 23px);
   line-height: 1.68;
@@ -1534,6 +1692,7 @@ main .record-subphoto img {
 
   .hero-metrics,
   .work-grid,
+  .education-grid,
   .studio-section,
   .profile-hero,
   .portfolio-grid,
@@ -1558,6 +1717,11 @@ main .record-subphoto img {
 
   .section-heading {
     display: block;
+  }
+
+  .section-lead {
+    margin-top: 18px;
+    font-size: 16px;
   }
 
   .work-card {
@@ -1609,6 +1773,10 @@ main .record-subphoto img {
 
   .site-footer .button {
     min-height: 42px;
+  }
+
+  .footer-legal {
+    grid-template-columns: 1fr;
   }
 
   .footer-actions {
@@ -1745,6 +1913,10 @@ main .record-subphoto img {
 
   /* ✅ work grid */
   .work-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .education-grid {
     grid-template-columns: 1fr;
   }
 
