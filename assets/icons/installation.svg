@@ -1,0 +1,28 @@
+				<svg xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 64 64"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round">
+					<!-- 믹서 본체 -->
+					<rect x="8" y="12" width="48" height="40" rx="4"/>
+					<!-- 액정 -->
+				<rect x="14" y="18" width="14" height="10" rx="1"/>
+				<line x1="17" y1="21" x2="25" y2="21"/>
+				<line x1="17" y1="24" x2="23" y2="24"/>
+					<!-- 액정 아래 노브 -->
+					<circle cx="21" cy="37" r="5"/>
+					<circle cx="21" cy="37" r="1.5" fill="currentColor" stroke="none"/>
+					<!-- 페이더 레일 -->
+					<line x1="38" y1="18" x2="38" y2="46"/>
+					<line x1="44" y1="18" x2="44" y2="46"/>
+					<line x1="50" y1="18" x2="50" y2="46"/>
+					<!-- 채워진 페이더 -->
+					<rect x="35" y="24" width="6" height="5" rx="1"
+								fill="currentColor" stroke="none"/>
+					<rect x="41" y="34" width="6" height="5" rx="1"
+								fill="currentColor" stroke="none"/>
+					<rect x="47" y="28" width="6" height="5" rx="1"
+								fill="currentColor" stroke="none"/>
+				</svg>

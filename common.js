@@ -384,6 +384,39 @@ function setupImagePreview() {
   });
 }
 
+async function loadIcons() {
+  const icons =
+    document.querySelectorAll("[data-icon]");
+  for (const icon of icons) {
+    const name = icon.dataset.icon;
+    try {
+      const response =
+        await fetch(
+          `assets/icons/${name}.svg`
+        );
+      if (!response.ok) continue;
+      icon.innerHTML =
+        await response.text();
+    } catch (err) {
+      console.error(err);
+    }
+  }
+}
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+    renderFavicon();
+    renderHeader();
+    renderFooter();
+    setupFooterPrivacyModal();
+    syncHomeNavigation();
+    setupMobileNavigation();
+    setupImagePreview();
+    loadIcons();
+  }
+);
+
 renderFavicon();
 renderHeader();
 renderFooter();

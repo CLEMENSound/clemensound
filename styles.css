@@ -2304,3 +2304,15 @@ body {
     transition: none;
   }
 }
+
+.service-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.service-title [data-icon] {
+  width: clamp(30px, 3vw, 42px);
+  height: clamp(30px, 3vw, 42px);
+  color: var(--gold);
+}
