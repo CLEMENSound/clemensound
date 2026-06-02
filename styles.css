@@ -1,7 +1,12 @@
 :root {
   color-scheme: dark;
   --font-main: "Century Gothic", "HY태백", "HYTaebaek", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+  --header-height: 86px;
+  --mobile-header-height: 70px;
   --hero-height: 46vh;
+  /* Responsive reference widths: iPad Air 13 = 1024px, iPhone 16 Pro Max = 440px. */
+  --breakpoint-ipad-air-13: 1024px;
+  --breakpoint-iphone-16-pro-max: 440px;
   --bg: #030303;
   --panel: #0d0e10;
   --panel-2: #14161a;
@@ -21,7 +26,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 86px;
+  scroll-padding-top: var(--header-height);
 }
 
 body {
@@ -45,7 +50,7 @@ a {
   inset: 0 0 auto;
   z-index: 100;
   width: 100%;
-  min-height: 86px;
+  min-height: var(--header-height);
   display: flex;
   align-items: center;
   padding: 22px clamp(20px, 4vw, 56px);
@@ -109,13 +114,12 @@ a {
   color: var(--text);
 }
 
-.hero {
+/* Hero common: index(.hero) and sub pages(.page-hero) share the same base. */
+.hero,
+.page-hero {
   position: relative;
   min-height: var(--hero-height);
-  display: grid;
-  align-items: end;
   overflow: hidden;
-  padding: 118px clamp(20px, 5vw, 72px) 30px;
   border-bottom: 1px solid var(--line);
   background-color: #030303;
   background-image:
@@ -132,6 +136,18 @@ a {
     auto;
 }
 
+/* Index hero layout. */
+.hero {
+  min-height: calc(var(--hero-height) + var(--header-height));
+  padding: calc(var(--header-height) + clamp(58px, 8vw, 96px)) clamp(20px, 5vw, 72px) 30px;
+}
+
+/* Sub page hero layout. */
+.page-hero {
+  padding: clamp(58px, 8vw, 96px) clamp(20px, 5vw, 72px);
+}
+
+/* Hero visual layers. Text must sit above .hero-shade with z-index: 1. */
 .sound-canvas,
 .hero-shade {
   position: absolute;
@@ -146,8 +162,9 @@ a {
 
 .hero-shade {
   background:
-    radial-gradient(circle at 72% 28%, rgba(215, 180, 106, 0.16), transparent 31%),
-    radial-gradient(circle at 18% 62%, rgba(119, 215, 213, 0.1), transparent 32%),
+    radial-gradient(circle at 52% 28%, rgba(211, 175, 55, 0.28 ), transparent 34%),
+    radial-gradient(circle at 38% 62%, rgba(188, 198, 204, 0.28), transparent 32%),
+    radial-gradient(circle at 18% 97%, rgba(73, 55, 27, 0.38), transparent 30%),
     linear-gradient(90deg, rgba(3, 3, 3, 0.74) 0%, rgba(3, 3, 3, 0.48) 44%, rgba(3, 3, 3, 0.32) 100%),
     linear-gradient(180deg, rgba(3, 3, 3, 0.18), rgba(3, 3, 3, 0.9));
 }
@@ -159,6 +176,7 @@ a {
   padding-bottom: clamp(32px, 6vh, 62px);
 }
 
+/* Small gold label used in hero and section headings. */
 .eyebrow {
   margin: 0 0 16px;
   color: var(--gold);
@@ -202,9 +220,50 @@ p,
 
 .hero-copy {
   width: min(1180px, 100%);
-  color: var(--white-soft);
+  color: rgba(188, 198, 204, 0.38);
   font-size: clamp(18px, 2vw, 24px);
   line-height: 1.62;
+}
+
+/* Hero text layer: keep copy above the shade overlay. */
+.hero h2,
+.hero-inner > p:not(.eyebrow),
+.page-hero h1,
+.page-hero h2,
+.page-hero > p:not(.eyebrow) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Sub page hero title. */
+.page-hero h1 {
+  max-width: 980px;
+  font-size: clamp(48px, 8vw, 118px);
+}
+
+/* Hero subtitle: intentionally softer than h1/eyebrow. */
+.hero h2,
+.page-hero h2 {
+  max-width: 980px;
+  color: var(--silver-soft);
+  opacity: 0.5;
+}
+
+/* Hero body copy. Exclude .eyebrow so its gold color and size remain intact. */
+.hero-inner > p:not(.eyebrow),
+.page-hero > p:not(.eyebrow) {
+  max-width: 1180px;
+  color: var(--white-soft);
+  font-size: clamp(18px, 1.7vw, 21px);
+  line-height: 1.68;
+}
+
+/* Hero eyebrow: same strength on index and sub pages. */
+.hero .eyebrow,
+.page-hero .eyebrow {
+  position: relative;
+  z-index: 1;
+  color: var(--gold);
 }
 
 .hero-actions {
@@ -528,16 +587,12 @@ h2 {
   color: var(--white-soft);
 } */
 
+/* Wide desktop: prevent important hero/studio lines from wrapping too early. */
 @media (min-width: 1700px) {
   .hero-copy,
-  .profile-hero h2,
-  .profile-hero p,
-  .portfolio-hero h2,
-  .portfolio-hero p,
-  .equipment-hero h2,
-  .equipment-hero p,
-	.contact-hero h2,
-	.contact-hero p,
+  .hero-inner > p:not(.eyebrow),
+  .page-hero h2,
+  .page-hero > p:not(.eyebrow),
   .studio-copy > h2,
   .studio-copy > p {
     white-space: nowrap;
@@ -777,44 +832,7 @@ h2 {
 .portfolio-page,
 .equipment-page,
 .contact-page {
-  padding-top: 86px;
-}
-
-.profile-hero {
-  position: relative;
-  overflow: hidden;
-  min-height: var(--hero-height);
-  padding: clamp(58px, 8vw, 96px) clamp(20px, 5vw, 72px);
-  border-bottom: 1px solid var(--line);
-  background-color: #030303;
-  background-image:
-    linear-gradient(90deg, rgba(3, 3, 3, 0.9), rgba(3, 3, 3, 0.54)),
-    var(--hero-bg-image);
-  background-position:
-    center,
-    top left;
-  background-repeat:
-    no-repeat,
-    repeat;
-  background-size:
-    auto,
-    auto;
-}
-
-.profile-hero h1 {
-  position: relative;
-  z-index: 1;
-  max-width: 980px;
-  font-size: clamp(48px, 8vw, 118px);
-}
-
-.profile-hero p {
-  position: relative;
-  z-index: 1;
-  max-width: 1180px;
-  color: var(--white-soft);
-  font-size: clamp(18px, 2vw, 23px);
-  line-height: 1.68;
+  padding-top: var(--header-height);
 }
 
 .profile-badge {
@@ -901,43 +919,6 @@ h2 {
   color: var(--white-soft);
   background: rgba(255, 255, 255, 0.05);
   font-weight: 700;
-}
-
-.portfolio-hero {
-  position: relative;
-  overflow: hidden;
-  min-height: var(--hero-height);
-  padding: clamp(58px, 8vw, 96px) clamp(20px, 5vw, 72px);
-  border-bottom: 1px solid var(--line);
-  background-color: #030303;
-  background-image:
-    linear-gradient(90deg, rgba(3, 3, 3, 0.9), rgba(3, 3, 3, 0.54)),
-    var(--hero-bg-image);
-  background-position:
-    center,
-    top left;
-  background-repeat:
-    no-repeat,
-    repeat;
-  background-size:
-    auto,
-    auto;
-}
-
-.portfolio-hero h1 {
-  position: relative;
-  z-index: 1;
-  max-width: 980px;
-  font-size: clamp(48px, 8vw, 118px);
-}
-
-.portfolio-hero p {
-  position: relative;
-  z-index: 1;
-  max-width: 1180px;
-  color: var(--white-soft);
-  font-size: clamp(18px, 2vw, 23px);
-  line-height: 1.68;
 }
 
 .portfolio-section {
@@ -1247,43 +1228,6 @@ main .record-subphoto img {
   font-size: 24px;
 }
 
-.equipment-hero {
-  position: relative;
-  overflow: hidden;
-  min-height: var(--hero-height);
-  padding: clamp(58px, 8vw, 96px) clamp(20px, 5vw, 72px);
-  border-bottom: 1px solid var(--line);
-  background-color: #030303;
-  background-image:
-    linear-gradient(90deg, rgba(3, 3, 3, 0.9), rgba(3, 3, 3, 0.54)),
-    var(--hero-bg-image);
-  background-position:
-    center,
-    top left;
-  background-repeat:
-    no-repeat,
-    repeat;
-  background-size:
-    auto,
-    auto;
-}
-
-.equipment-hero h1 {
-  position: relative;
-  z-index: 1;
-  max-width: 980px;
-  font-size: clamp(48px, 8vw, 118px);
-}
-
-.equipment-hero p {
-  position: relative;
-  z-index: 1;
-  max-width: 1180px;
-  color: var(--white-soft);
-  font-size: clamp(18px, 2vw, 23px);
-  line-height: 1.68;
-}
-
 .equipment-section {
   padding: clamp(62px, 9vw, 112px) clamp(20px, 5vw, 72px);
   border-bottom: 1px solid var(--line);
@@ -1443,43 +1387,6 @@ main .record-subphoto img {
 .equipment-list h3 {
   margin-bottom: 0;
   font-size: 24px;
-}
-
-.contact-hero {
-  position: relative;
-  overflow: hidden;
-  min-height: var(--hero-height);
-  padding: clamp(58px, 8vw, 96px) clamp(20px, 5vw, 72px);
-  border-bottom: 1px solid var(--line);
-  background-color: #030303;
-  background-image:
-    linear-gradient(90deg, rgba(3, 3, 3, 0.9), rgba(3, 3, 3, 0.54)),
-    var(--hero-bg-image);
-  background-position:
-    center,
-    top left;
-  background-repeat:
-    no-repeat,
-    repeat;
-  background-size:
-    auto,
-    auto;
-}
-
-.contact-hero h1 {
-  position: relative;
-  z-index: 1;
-  max-width: 980px;
-  font-size: clamp(48px, 8vw, 118px);
-}
-
-.contact-hero p {
-  position: relative;
-  z-index: 1;
-  max-width: 760px;
-  color: var(--white-soft);
-  font-size: clamp(18px, 2vw, 23px);
-  line-height: 1.68;
 }
 
 .contact-section {
@@ -1729,7 +1636,9 @@ main .record-subphoto img {
   }
 }
 
-@media (max-width: 860px) {
+/* iPad Air 13-inch portrait and below: 1024px x 1366px CSS viewport. */
+/* iPad Air 13-inch refinements. */
+@media (max-width: 1024px) {
   body {
     padding-bottom: 184px;
   }
@@ -1740,19 +1649,20 @@ main .record-subphoto img {
 
 
 
+  /* Hero responsive height. */
   .hero,
-  .profile-hero,
-  .portfolio-hero,
-  .equipment-hero,
-  .contact-hero {
+  .page-hero {
     min-height: var(--hero-height);
+  }
+
+  .hero {
+    min-height: calc(var(--hero-height) + var(--header-height));
   }
 
   .hero-metrics,
   .work-grid,
   .education-grid,
   .studio-section,
-  .profile-hero,
   .portfolio-grid,
   .form-grid,
   .service-checks {
@@ -1843,7 +1753,9 @@ main .record-subphoto img {
   }
 }
 
-@media (max-width: 520px) {
+/* iPhone 16 Pro Max portrait and below: 440px x 956px CSS viewport. */
+/* iPhone 16 Pro Max detailed mobile layout. */
+@media (max-width: 440px) {
   body {
     padding-bottom: 220px;
   }
@@ -1857,10 +1769,7 @@ main .record-subphoto img {
   }
 
   .hero,
-  .profile-hero,
-  .portfolio-hero,
-  .equipment-hero,
-  .contact-hero {
+  .page-hero {
     min-height: var(--hero-height);
     padding-top: 104px;
   }
@@ -1886,7 +1795,7 @@ main .record-subphoto img {
   .portfolio-page,
   .equipment-page,
   .contact-page {
-    padding-top: 70px;
+    padding-top: var(--mobile-header-height);
   }
 
   .address-row,
@@ -1895,20 +1804,17 @@ main .record-subphoto img {
     display: grid;
   }
 
-  .profile-hero {
-    padding-top: 70px;
-  }
-
   .profile-badge {
     max-width: 180px;
   }
 }
 
 /* =========================
-   ✅ 모바일 반응형 FIX
+   ✅ iPhone 16 Pro Max 반응형 FIX
 ========================= */
 
-@media (max-width: 768px) {
+/* iPhone 16 Pro Max general mobile layout. */
+@media (max-width: 440px) {
 
   /* ✅ 헤더 */
   .site-header {
@@ -1950,7 +1856,8 @@ main .record-subphoto img {
     line-height: 1.1;
   }
 
-  .hero-copy {
+  .hero-copy,
+  .hero-inner > p:not(.eyebrow) {
     font-size: 16px;
     line-height: 1.5;
   }
@@ -2002,10 +1909,6 @@ main .record-subphoto img {
   }
 
   /* ✅ profile */
-  .profile-hero {
-    grid-template-columns: 1fr;
-  }
-
   .profile-list article {
     grid-template-columns: 1fr;
   }
@@ -2049,8 +1952,8 @@ main .record-subphoto img {
   margin: 5px 0;
 }
 
-/* 모바일 */
-@media (max-width: 768px) {
+/* iPhone 16 Pro Max navigation: 440px x 956px CSS viewport. */
+@media (max-width: 440px) {
 
   .site-header {
     flex-direction: row;
@@ -2064,10 +1967,10 @@ main .record-subphoto img {
 
   .nav-links {
     position: fixed;
-    top: 70px;
+    top: var(--mobile-header-height);
     left: 0;
     width: 100%;
-    height: calc(100vh - 70px);
+    height: calc(100vh - var(--mobile-header-height));
 
     background: rgba(0,0,0,0.95);
     backdrop-filter: blur(20px);
@@ -2117,15 +2020,17 @@ body {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-@media (max-width: 860px) {
+/* iPad Air 13-inch layout reset. */
+@media (max-width: 1024px) {
   body {
     padding-bottom: 0;
   }
 }
 
-@media (max-width: 768px) {
+/* iPhone 16 Pro Max header, menu, and hero layout. */
+@media (max-width: 440px) {
   .site-header {
-    min-height: 70px;
+    min-height: var(--mobile-header-height);
     padding: 13px 18px;
     z-index: 200;
   }
@@ -2145,13 +2050,13 @@ body {
 
   .nav-links {
     position: fixed;
-    top: 70px;
+    top: var(--mobile-header-height);
     left: 0;
     z-index: 190;
     display: flex;
     width: 100%;
-    height: calc(100vh - 70px);
-    height: calc(100dvh - 70px);
+    height: calc(100vh - var(--mobile-header-height));
+    height: calc(100dvh - var(--mobile-header-height));
     margin: 0;
     padding: 28px 20px 40px;
     background: rgba(3, 3, 3, 0.97);
@@ -2203,24 +2108,25 @@ body {
     line-height: 1.08;
   }
 
+  /* Mobile hero spacing shared by index and sub pages. */
   .hero,
-  .profile-hero,
-  .portfolio-hero,
-  .equipment-hero,
-  .contact-hero {
+  .page-hero {
     min-height: auto;
     padding: 86px 20px 34px;
+  }
+
+  .hero {
+    padding-top: calc(var(--mobile-header-height) + 86px);
   }
 
   .hero-inner {
     padding-bottom: 26px;
   }
 
+  /* Mobile hero body copy. Eyebrow is excluded on purpose. */
   .hero-copy,
-  .profile-hero p,
-  .portfolio-hero p,
-  .equipment-hero p,
-  .contact-hero p {
+  .hero-inner > p:not(.eyebrow),
+  .page-hero > p:not(.eyebrow) {
     font-size: 16px;
     line-height: 1.58;
   }
@@ -2246,7 +2152,7 @@ body {
   .portfolio-page,
   .equipment-page,
   .contact-page {
-    padding-top: 70px;
+    padding-top: var(--mobile-header-height);
   }
 
   .profile-badge {
@@ -2304,7 +2210,8 @@ body {
   }
 }
 
-@media (max-width: 520px) {
+/* iPhone 16 Pro Max footer/action layout. */
+@media (max-width: 440px) {
   body {
     padding-bottom: 0;
   }
@@ -2377,7 +2284,8 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+/* iPhone 16 Pro Max service action grid. */
+@media (max-width: 440px) {
   .hero-actions-grid {
     grid-template-columns: 1fr;
   }
