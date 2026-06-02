@@ -374,6 +374,60 @@ h2 {
   line-height: 1.74;
 }
 
+.service-overview{
+  padding:24px;
+  background: var(--panel);
+  margin-top:-20px;
+  margin-bottom:20px;
+  text-align:center;
+  position: relative;
+  z-index: 20;
+  border: 1px solid rgba(215,180,106,.25);
+  box-shadow:
+    0 12px 40px rgba(0,0,0,.4),
+    0 0 0 1px rgba(215,180,106,.08);
+}
+
+.service-overview strong{
+  display:block;
+  color:var(--gold);
+  font-size:22px;
+  margin-bottom:10px;
+	letter-spacing:0.05em;
+}
+
+.hero-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1px;
+  width: 100%;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.hero-action {
+  padding: 18px;
+  background: rgba(8, 9, 10, 0.72);
+  border: 1px solid rgba(215, 180, 106, 0.15);
+  transition: 0.25s ease;
+}
+
+.hero-action:hover {
+  background: #181d23;
+  border-color: rgba(215, 180, 106, 0.35);
+}
+
+.hero-action h3 {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.hero-action p {
+  margin: 0;
+  color: var(--white-soft);
+  font-size: 14px;
+  line-height: 1.5;
+}
 .services-section {
   background: #08090a;
 }
@@ -397,14 +451,11 @@ h2 {
   font-weight: 800;
 }
 
-.education-section {
-  background:
-    linear-gradient(135deg, rgba(119, 215, 213, 0.08), transparent 34%),
-    #030303;
+.setup-operation-section {
   border-bottom: 1px solid var(--line);
 }
 
-.setup-operation-section {
+.education-section {
   border-bottom: 1px solid var(--line);
 }
 
@@ -453,7 +504,6 @@ h2 {
 
 .inspection-section {
   border-bottom: 1px solid var(--line);
-  background: #08090a;
 }
 
 .studio-section {
@@ -465,7 +515,7 @@ h2 {
 }
 
 .studio-copy {
-  max-width: 760px;
+  max-width: 100%;
 }
 
 .studio-copy .section-description {
@@ -486,6 +536,8 @@ h2 {
   .portfolio-hero p,
   .equipment-hero h2,
   .equipment-hero p,
+	.contact-hero h2,
+	.contact-hero p,
   .studio-copy > h2,
   .studio-copy > p {
     white-space: nowrap;
@@ -2306,13 +2358,27 @@ body {
 }
 
 .service-title {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 40px auto;
   gap: 12px;
 }
 
-.service-title [data-icon] {
-  width: clamp(30px, 3vw, 42px);
-  height: clamp(30px, 3vw, 42px);
-  color: var(--gold);
+.service-icon {
+  width: 0.9em;
+  height: 0.9em;
+  flex-shrink: 0;
+  opacity: 1;
+  vertical-align: middle;
+}
+
+@media (max-width: 1200px) {
+  .hero-actions-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-actions-grid {
+    grid-template-columns: 1fr;
+  }
 }
