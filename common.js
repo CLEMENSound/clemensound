@@ -13,7 +13,7 @@ const businessInfo = {
   owner: "대표: 이기성",
   address: "소재지: 서울시 금천구 독산로22길 35-14, 201호",
   customerCenter: `고객센터: 010-3210-8314 / ${contactEmail}`,
-	registration: "사업자등록번호: 123-45-67890",
+	registration: "사업자등록번호: 575-34-01871",
 };
 
 const navItems = [
