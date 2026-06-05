@@ -1,12 +1,17 @@
 const page = document.body.dataset.page || "home";
-const footerTitle =
-  document.body.dataset.footerTitle || "행사 일정, 장소, 필요한 내용을 알려주세요.";
-const pagesWithoutFooterTitle = new Set(["home", "profile", "equipment", "portfolio"]);
 const contactEmail = "clemensound@naver.com";
-const kakaoTalkUrl = "https://open.kakao.com/o/REPLACE_WITH_YOUR_LINK";
+const kakaoJavaScriptKey = "";
+const kakaoChannelUrl = "https://pf.kakao.com/_xkjYGX/chat";
+const kakaoChannelPublicId = getKakaoChannelPublicId(kakaoChannelUrl);
+const kakaoTalkUrl = getKakaoChannelChatUrl(kakaoChannelUrl);
+const kakaoSdkScript = {
+  src: "https://t1.kakaocdn.net/kakao_js_sdk/2.8.1/kakao.min.js",
+  integrity: "sha384-OL+ylM/iuPLtW5U3XcvLSGhE8JzReKDank5InqlHGWPhb4140/yrBw0bg0y7+C9J",
+};
 const instagramUrl = "https://www.instagram.com/clemensound";
-const faviconHref = "assets/icons/favicon_BK_512.png";
-const brandLogoHref = "assets/images/CLEMENSound-Logo-WH.png";
+const daangnBusinessUrl = "https://www.daangn.com/kr/local-profile/vc8u3mpbromg";
+const faviconHref = "assets/logo_bg_icons/favicon_BK_512.png";
+const brandLogoHref = "assets/logo_bg_icons/CLEMENSound-Logo-WH.png";
 const copyrightText = "© 2026 CLEMENSound. All rights reserved.";
 const businessInfo = {
   company: "상호: 클레멘사운드",
@@ -90,18 +95,13 @@ function renderHeader() {
 }
 
 function renderFooter() {
-  if (page === "contact" || page === "thanks") return;
-
   const mount = document.querySelector("[data-footer]");
   if (!mount) return;
-
-  const footerHeading = pagesWithoutFooterTitle.has(page) ? "" : `<h2>${footerTitle}</h2>`;
 
   mount.outerHTML = `
     <footer id="contact" class="site-footer">
       <div>
         <p class="eyebrow">Contact</p>
-        ${footerHeading}
         <div class="footer-legal" aria-label="사업자 정보">
           <span>${businessInfo.company}</span>
           <span>${businessInfo.owner}</span>
@@ -127,7 +127,13 @@ function renderFooter() {
             <path d="M12 4.2c-4.4 0-8 2.8-8 6.3 0 2.2 1.5 4.2 3.8 5.3l-.8 3.4 3.7-2.5c.4.1.9.1 1.3.1 4.4 0 8-2.8 8-6.3s-3.6-6.3-8-6.3Z"></path>
           </svg>
         </a>
-        <a class="button primary" href="contact.html">문의 접수</a>
+        <a class="social-link daangn" href="${daangnBusinessUrl}" target="_blank" rel="noopener" aria-label="Danggeun Business">
+          <svg viewBox="0 0 21.0491 36" aria-hidden="true" focusable="false">
+            <path d="M10.5245 13.2822C4.71228 13.2822 0 17.8902 0 23.7078C0 31.7459 10.5548 36.0112 10.5245 35.9997C10.4957 36.0112 21.0491 31.7459 21.0491 23.7078C21.0491 17.8945 16.3368 13.2822 10.5245 13.2822ZM10.5245 27.9285C9.73639 27.9279 8.96612 27.6936 8.3111 27.2552C7.65609 26.8168 7.14574 26.194 6.84459 25.4656C6.54345 24.7371 6.46502 23.9357 6.61923 23.1626C6.77345 22.3896 7.15337 21.6796 7.71097 21.1226C8.26857 20.5655 8.97881 20.1862 9.75188 20.0328C10.525 19.8794 11.3261 19.9587 12.0542 20.2607C12.7822 20.5627 13.4043 21.0738 13.8419 21.7294C14.2795 22.385 14.5129 23.1557 14.5126 23.944C14.5136 24.4682 14.4111 24.9875 14.211 25.472C14.011 25.9565 13.7173 26.3968 13.3468 26.7676C12.9763 27.1384 12.5364 27.4325 12.0521 27.6329C11.5677 27.8334 11.0487 27.9362 10.5245 27.9357V27.9285Z" fill="#FF6F0F"></path>
+            <path d="M12.8944 0C10.4381 0 8.72773 1.71648 8.4585 3.744C5.18452 2.83968 2.6189 5.328 2.6189 8.064C2.6189 10.1592 4.05864 11.8512 5.97782 12.4013C7.52554 12.8434 10.3129 12.5136 10.3129 12.5136C10.2985 11.8368 10.9219 11.0938 11.8836 10.417C14.6192 8.49312 16.7586 7.58592 17.0883 4.96224C17.4339 2.2176 15.3966 0 12.8944 0Z" fill="#00A05B"></path>
+          </svg>
+        </a>
+        <a class="button primary" href="contact.html">문의</a>
       </div>
     </footer>
     <div id="footer-privacy-modal" class="modal" hidden>
@@ -172,6 +178,66 @@ function setupFooterPrivacyModal() {
   });
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && !modal.hidden) closeModal();
+  });
+}
+
+function isConfigured(value) {
+  return value && !value.includes("REPLACE_WITH");
+}
+
+function getKakaoChannelPublicId(channelUrl) {
+  const match = channelUrl.match(/pf\.kakao\.com\/([^/?#]+)/);
+  return match ? match[1] : channelUrl;
+}
+
+function getKakaoChannelChatUrl(channelUrl) {
+  const cleanUrl = channelUrl.replace(/\/$/, "");
+  return cleanUrl.endsWith("/chat") ? cleanUrl : `${cleanUrl}/chat`;
+}
+
+function loadKakaoSdk() {
+  if (window.Kakao) return Promise.resolve(window.Kakao);
+
+  const existing = document.querySelector(`script[src="${kakaoSdkScript.src}"]`);
+  if (existing) {
+    return new Promise((resolve, reject) => {
+      existing.addEventListener("load", () => resolve(window.Kakao), { once: true });
+      existing.addEventListener("error", reject, { once: true });
+    });
+  }
+
+  return new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = kakaoSdkScript.src;
+    script.integrity = kakaoSdkScript.integrity;
+    script.crossOrigin = "anonymous";
+    script.onload = () => resolve(window.Kakao);
+    script.onerror = reject;
+    document.head.append(script);
+  });
+}
+
+function setupKakaoTalkChannel() {
+  const chatLink = document.querySelector(".social-link.kakao");
+  if (!chatLink || !isConfigured(kakaoJavaScriptKey) || !isConfigured(kakaoChannelPublicId)) return;
+
+  chatLink.addEventListener("click", async (event) => {
+    event.preventDefault();
+
+    try {
+      const Kakao = await loadKakaoSdk();
+
+      if (!Kakao.isInitialized()) {
+        Kakao.init(kakaoJavaScriptKey);
+      }
+
+      Kakao.Channel.chat({
+        channelPublicId: kakaoChannelPublicId,
+      });
+    } catch (error) {
+      console.warn("Kakao channel chat failed. Opening fallback URL.", error);
+      window.open(kakaoTalkUrl, "_blank", "noopener");
+    }
   });
 }
 
@@ -391,3 +457,4 @@ syncHomeNavigation();
 setupMobileNavigation();
 setupImagePreview();
 setupFooterPrivacyModal();
+setupKakaoTalkChannel();

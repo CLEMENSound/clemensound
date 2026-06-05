@@ -17,7 +17,7 @@
   --gold: #d7b46a;
   --red: #d95f50;
   --cyan: #77d7d5;
-  --hero-bg-image: url("assets/images/Saffiano_BG_Garo.jpg");
+  --hero-bg-image: url("assets/logo_bg_icons/Saffiano_BG_Garo.jpg");
 }
 
 * {
@@ -815,6 +815,19 @@ h2 {
 }
 
 .social-link.kakao svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  stroke: none;
+}
+
+.social-link.daangn {
+  color: #ff6f0f;
+  background: #fff;
+  border-color: #ff6f0f;
+}
+
+.social-link.daangn svg {
   width: 24px;
   height: 24px;
   fill: currentColor;
