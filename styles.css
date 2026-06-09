@@ -219,10 +219,23 @@ h1 {
 }
 
 #hero-title span:last-child {
-  color: transparent;
+  color: #f5f2eb;
   background: linear-gradient(92deg, #ffffff 0%, #c0c0c0 46%, var(--gold) 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  #hero-title span:last-child {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+}
+
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  #hero-title span:last-child {
+    background: none;
+  }
 }
 
 h2,
@@ -550,7 +563,7 @@ h2 {
   grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.72fr);
   gap: clamp(28px, 6vw, 86px);
   align-items: start;
-  padding: clamp(72px, 9vw, 118px) clamp(20px, 5vw, 72px);
+  padding: clamp(72px, 9vw, 50px) clamp(20px, 5vw, 72px);
   border-bottom: 1px solid var(--line);
   background:
     linear-gradient(145deg, rgba(119, 215, 213, 0.08), transparent 30%),
@@ -624,7 +637,7 @@ h2 {
   grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.72fr);
   gap: clamp(28px, 6vw, 86px);
   align-items: start;
-  padding: clamp(72px, 9vw, 118px) clamp(20px, 5vw, 72px);
+  padding: clamp(72px, 9vw, 50px) clamp(20px, 5vw, 72px);
   border-bottom: 1px solid var(--line);
   background:
     linear-gradient(135deg, rgba(215, 180, 106, 0.1), transparent 34%),
