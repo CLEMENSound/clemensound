@@ -1,9 +1,9 @@
 :root {
   color-scheme: dark;
   --font-main: "Century Gothic", "HY태백", "HYTaebaek", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
-  --header-height: 86px;
-  --mobile-header-height: 70px;
-  --hero-height: 46vh;
+  --header-height: 76px;
+  --mobile-header-height: 62px;
+  --hero-height: 38vh;
   /* Responsive reference widths: iPad Air 13 = 1024px, iPhone 16 Pro Max = 440px. */
   --breakpoint-ipad-air-13: 1024px;
   --breakpoint-iphone-16-pro-max: 440px;
@@ -45,6 +45,18 @@ a {
   text-decoration: none;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .site-header {
   position: fixed;
   inset: 0 0 auto;
@@ -53,7 +65,7 @@ a {
   min-height: var(--header-height);
   display: flex;
   align-items: center;
-  padding: 22px clamp(20px, 4vw, 56px);
+  padding: 16px clamp(20px, 4vw, 56px);
   border-bottom: 1px solid rgba(245, 242, 235, 0.1);
   background: rgba(3, 3, 3, 0.82);
   backdrop-filter: blur(18px);
@@ -105,6 +117,12 @@ a {
   font-weight: 600;
 }
 
+.nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .nav-links a:hover {
   color: var(--text);
 }
@@ -112,6 +130,44 @@ a {
 .nav-links a.is-active,
 .nav-links a[aria-current="page"] {
   color: var(--text);
+}
+
+.nav-submenu {
+  position: absolute;
+  top: calc(100% + 18px);
+  left: 50%;
+  display: grid;
+  min-width: 176px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(13, 14, 16, 0.98);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.38);
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -6px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+}
+
+.nav-submenu a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 6px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.nav-submenu a:hover,
+.nav-submenu a:focus {
+  color: var(--text);
+  background: rgba(215, 180, 106, 0.12);
+}
+
+.nav-item:hover .nav-submenu,
+.nav-item:focus-within .nav-submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
 }
 
 /* Hero common: index(.hero) and sub pages(.page-hero) share the same base. */
@@ -139,12 +195,12 @@ a {
 /* Index hero layout. */
 .hero {
   min-height: var(--hero-height);
-  padding: calc(var(--header-height) + clamp(40px, 6vw, 70px)) clamp(20px, 5vw, 72px) clamp(42px, 6vw, 70px);
+  padding: calc(var(--header-height) + clamp(28px, 5vw, 54px)) clamp(20px, 5vw, 72px) clamp(30px, 5vw, 54px);
 }
 
 /* Sub page hero layout. */
 .page-hero {
-  padding: clamp(58px, 8vw, 96px) clamp(20px, 5vw, 72px);
+  padding: clamp(42px, 6vw, 72px) clamp(20px, 5vw, 72px);
 }
 
 /* Hero visual layers. Text must sit above .hero-shade with z-index: 1. */
@@ -571,10 +627,12 @@ h2 {
 }
 
 .concerns-copy {
+  grid-column: 1 / -1;
   width: 100%;
 }
 
 .concerns-copy h2,
+.solutions-heading h1,
 .solutions-heading h2 {
   margin-bottom: 24px;
   color: var(--text);
@@ -595,33 +653,22 @@ h2 {
   color: var(--gold);
 }
 
-.concerns-list {
-  display: grid;
-  gap: 12px;
+.concerns-media {
+  align-self: stretch;
+  width: 100%;
   margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.concerns-list li {
-  position: relative;
-  padding: 16px 16px 16px 44px;
   border: 1px solid var(--line);
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--white-soft);
-  font-size: clamp(16px, 1.3vw, 19px);
-  font-weight: 700;
-  line-height: 1.55;
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(215, 180, 106, 0.16), transparent 38%),
+    #101114;
+  overflow: hidden;
 }
 
-.concerns-list li::before {
-  content: "✓";
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  color: var(--gold);
-  font-weight: 800;
+.concerns-media img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .concerns-closing {
@@ -690,6 +737,24 @@ h2 {
   color: #f8ead0;
 }
 
+.why-media {
+  align-self: start;
+  width: 100%;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(215, 180, 106, 0.14), transparent 38%),
+    #101114;
+  overflow: hidden;
+}
+
+.why-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .solutions-section {
   padding: clamp(76px, 11vw, 142px) clamp(20px, 5vw, 72px);
   border-bottom: 1px solid var(--line);
@@ -713,6 +778,7 @@ h2 {
 @media (min-width: 1025px) {
   .concerns-copy h2,
   .why-copy h2,
+  .solutions-heading h1,
   .solutions-heading h2 {
     white-space: nowrap;
   }
@@ -863,6 +929,39 @@ h2 {
   height: 100%;
   display: block;
   object-fit: cover;
+}
+
+.service-anchor-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 24px 0 0;
+}
+
+.service-anchor-nav a {
+  padding: 10px 14px;
+  border: 1px solid rgba(215, 180, 106, 0.34);
+  border-radius: 6px;
+  color: #f8ead0;
+  background: rgba(215, 180, 106, 0.08);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.service-anchor-nav a:hover,
+.service-anchor-nav a:focus {
+  border-color: rgba(215, 180, 106, 0.68);
+  background: rgba(215, 180, 106, 0.16);
+}
+
+.service-anchor-nav a[aria-selected="true"] {
+  border-color: var(--gold);
+  color: #050505;
+  background: var(--gold);
+}
+
+.service-tab-panel[hidden] {
+  display: none;
 }
 
 .education-section {
@@ -1195,6 +1294,7 @@ h2 {
 .profile-page,
 .portfolio-page,
 .equipment-page,
+.service-page,
 .contact-page {
   padding-top: var(--header-height);
 }
@@ -1288,6 +1388,14 @@ h2 {
 .portfolio-section {
   padding: clamp(62px, 9vw, 112px) clamp(20px, 5vw, 72px);
   border-bottom: 1px solid var(--line);
+}
+
+.service-page .solutions-section {
+  padding: clamp(62px, 9vw, 112px) clamp(20px, 5vw, 72px);
+}
+
+.service-page .solutions-heading {
+  grid-template-columns: 1fr;
 }
 
 .portfolio-grid {
@@ -2054,6 +2162,10 @@ main .record-subphoto img {
     aspect-ratio: 16 / 9;
   }
 
+  .concerns-media {
+    min-height: 0;
+  }
+
   .equipment-head {
     display: none;
   }
@@ -2146,7 +2258,7 @@ main .record-subphoto img {
   }
 
   .site-header {
-    padding: 18px 18px;
+    padding: 10px 18px;
   }
 
   .brand {
@@ -2156,7 +2268,7 @@ main .record-subphoto img {
   .hero,
   .page-hero {
     min-height: var(--hero-height);
-    padding-top: 104px;
+    padding-top: 86px;
   }
 
   .hero-metrics {
@@ -2179,6 +2291,7 @@ main .record-subphoto img {
   .profile-page,
   .portfolio-page,
   .equipment-page,
+  .service-page,
   .contact-page {
     padding-top: var(--mobile-header-height);
   }
@@ -2468,6 +2581,35 @@ body {
     font-size: 18px;
   }
 
+  .nav-item {
+    display: block;
+    width: 100%;
+  }
+
+  .nav-submenu {
+    position: static;
+    display: grid;
+    width: 100%;
+    min-width: 0;
+    padding: 0 0 12px 18px;
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .nav-submenu a {
+    min-height: 40px;
+    padding: 0;
+    border-bottom: 0;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
   .nav-links.open {
     transform: translateY(0);
     visibility: visible;
@@ -2526,11 +2668,11 @@ body {
   .hero,
   .page-hero {
     min-height: auto;
-    padding: 86px 20px 34px;
+    padding: 70px 20px 28px;
   }
 
   .hero {
-    padding-top: calc(var(--mobile-header-height) + 86px);
+    padding-top: calc(var(--mobile-header-height) + 58px);
   }
 
   .hero-inner {
@@ -2554,7 +2696,12 @@ body {
     padding: 54px 20px 58px;
   }
 
+  .service-page .solutions-section {
+    padding: 54px 20px 58px;
+  }
+
   .concerns-copy h2,
+  .solutions-heading h1,
   .solutions-heading h2 {
     margin-bottom: 20px;
     font-size: clamp(30px, 9vw, 42px);
@@ -2568,17 +2715,6 @@ body {
     font-size: 12px;
     line-height: 1.45;
     letter-spacing: 0.14em;
-  }
-
-  .concerns-list li {
-    padding: 14px 14px 14px 40px;
-    font-size: 15px;
-    line-height: 1.6;
-  }
-
-  .concerns-list li::before {
-    top: 14px;
-    left: 14px;
   }
 
   .concerns-closing {
@@ -2688,6 +2824,7 @@ body {
   .profile-page,
   .portfolio-page,
   .equipment-page,
+  .service-page,
   .contact-page {
     padding-top: var(--mobile-header-height);
   }
@@ -2831,7 +2968,7 @@ body {
 @media (max-width: 640px) {
   .site-header {
     min-height: var(--mobile-header-height);
-    padding: 13px 18px;
+    padding: 10px 18px;
   }
 
   .header-inner {

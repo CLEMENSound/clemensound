@@ -66,3 +66,57 @@ function setupSoundCanvas(canvas) {
 }
 
 canvases.forEach(setupSoundCanvas);
+
+function setupServiceTabs() {
+  const tabLinks = Array.from(document.querySelectorAll("[data-service-tab]"));
+  const panels = Array.from(document.querySelectorAll("[data-service-panel]"));
+
+  if (!tabLinks.length || !panels.length) return;
+
+  const panelIds = new Set(panels.map((panel) => panel.id));
+
+  const activateTab = (targetId, updateHash = true) => {
+    if (!panelIds.has(targetId)) return;
+
+    tabLinks.forEach((tab) => {
+      const isActive = tab.dataset.serviceTab === targetId;
+      tab.setAttribute("aria-selected", String(isActive));
+      tab.classList.toggle("is-active", isActive);
+    });
+
+    panels.forEach((panel) => {
+      panel.hidden = panel.dataset.servicePanel !== targetId;
+    });
+
+    if (updateHash && window.location.hash !== `#${targetId}`) {
+      history.replaceState(null, "", `#${targetId}`);
+    }
+  };
+
+  tabLinks.forEach((tab, index) => {
+    tab.addEventListener("click", (event) => {
+      event.preventDefault();
+      activateTab(tab.dataset.serviceTab);
+    });
+
+    tab.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      event.preventDefault();
+
+      const direction = event.key === "ArrowRight" ? 1 : -1;
+      const nextIndex = (index + direction + tabLinks.length) % tabLinks.length;
+      tabLinks[nextIndex].focus();
+      activateTab(tabLinks[nextIndex].dataset.serviceTab);
+    });
+  });
+
+  const initialId = window.location.hash.slice(1);
+  activateTab(panelIds.has(initialId) ? initialId : tabLinks[0].dataset.serviceTab, false);
+
+  window.addEventListener("hashchange", () => {
+    const targetId = window.location.hash.slice(1);
+    if (panelIds.has(targetId)) activateTab(targetId, false);
+  });
+}
+
+setupServiceTabs();

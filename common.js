@@ -23,17 +23,24 @@ const businessInfo = {
 
 const navItems = [
   { key: "home", label: "홈", href: "index.html" },
+  {
+    key: "service",
+    label: "서비스",
+    href: "service.html",
+    children: [
+      { label: "설치 & 운영", href: "service.html#installation-operation" },
+      { label: "점검 & 컨설팅", href: "service.html#inspection-consulting" },
+      { label: "교육", href: "service.html#education-service" },
+    ],
+  },
+  { key: "portfolio", label: "포트폴리오", href: "portfolio.html" },
   { key: "profile", label: "프로필", href: "profile.html" },
   { key: "equipment", label: "보유 장비", href: "equipment.html" },
-  { key: "portfolio", label: "포트폴리오", href: "portfolio.html" },
   { key: "contact", label: "문의", href: "contact.html" },
 ];
 
 const homeSections = [
   { key: "home", id: "top" },
-  { key: "home", id: "setup-operation" },
-  { key: "home", id: "inspection" },
-  { key: "home", id: "education" }, 
 ];
 
 function renderFavicon() {
@@ -68,7 +75,18 @@ function renderHeader() {
       const isActive = page === item.key;
       const activeAttrs = isActive ? ' aria-current="page" class="is-active"' : "";
 
-      return `<a href="${href}" data-nav-key="${item.key}"${activeAttrs}>${item.label}</a>`;
+      const children = item.children
+        ? `<div class="nav-submenu" aria-label="${item.label} 하위 메뉴">
+            ${item.children
+              .map((child) => `<a href="${child.href}" data-nav-key="${item.key}">${child.label}</a>`)
+              .join("")}
+          </div>`
+        : "";
+
+      return `<div class="nav-item${children ? " has-submenu" : ""}">
+        <a href="${href}" data-nav-key="${item.key}"${activeAttrs}>${item.label}</a>
+        ${children}
+      </div>`;
     })
     .join("");
 
