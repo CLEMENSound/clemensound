@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /pricedetail.html
+Disallow: /thanks.html
+
+Sitemap: https://clemensound.com/sitemap.xml

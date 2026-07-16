@@ -36,6 +36,7 @@ const navItems = [
   { key: "portfolio", label: "포트폴리오", href: "portfolio.html" },
   { key: "profile", label: "프로필", href: "profile.html" },
   { key: "equipment", label: "보유 장비", href: "equipment.html" },
+  { key: "price", label: "가격", href: "price.html" },
   { key: "contact", label: "문의", href: "contact.html" },
 ];
 
@@ -468,11 +469,73 @@ function setupImagePreview() {
   });
 }
 
+function setupScrollReveal() {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const revealTargets = document.querySelectorAll(`
+    main > section:not(.hero):not(.page-hero),
+    .concerns-copy,
+    .why-copy,
+    .why-media,
+    .solution-card,
+    .record-item,
+    .performance-item,
+    .equipment-row,
+    .profile-list article,
+    .portfolio-grid article,
+    .service-list article,
+    .price-card,
+    .education-card,
+    .price-table-wrap,
+    .price-extra-grid > div,
+    .price-notice,
+    .price-cta
+  `);
+
+  if (!revealTargets.length) return;
+
+  revealTargets.forEach((target, index) => {
+    target.classList.add("scroll-reveal");
+    target.style.setProperty("--reveal-delay", `${Math.min(index % 6, 5) * 42}ms`);
+  });
+
+  ["#event-sound .price-card", "#education .price-card"].forEach((selector) => {
+    const targets = Array.from(document.querySelectorAll(selector));
+
+    targets.forEach((target, index) => {
+      target.classList.add("scroll-reveal-from-right");
+      target.style.setProperty("--reveal-delay", `${(targets.length - 1 - index) * 130}ms`);
+    });
+  });
+
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    revealTargets.forEach((target) => target.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      root: null,
+      rootMargin: "0px 0px -8% 0px",
+      threshold: 0.12,
+    },
+  );
+
+  revealTargets.forEach((target) => observer.observe(target));
+}
+
 renderFavicon();
 renderHeader();
 renderFooter();
 syncHomeNavigation();
 setupMobileNavigation();
 setupImagePreview();
+setupScrollReveal();
 setupFooterPrivacyModal();
 setupKakaoTalkChannel();

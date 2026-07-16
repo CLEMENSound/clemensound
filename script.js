@@ -85,7 +85,14 @@ function setupServiceTabs() {
     });
 
     panels.forEach((panel) => {
-      panel.hidden = panel.dataset.servicePanel !== targetId;
+      const isActive = panel.dataset.servicePanel === targetId;
+      panel.hidden = !isActive;
+
+      if (isActive) {
+        panel.querySelectorAll(".scroll-reveal").forEach((item) => {
+          item.classList.add("is-visible");
+        });
+      }
     });
 
     if (updateHash && window.location.hash !== `#${targetId}`) {
