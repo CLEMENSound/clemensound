@@ -3386,6 +3386,13 @@ body {
   max-width: 860px;
 }
 
+.simple-price-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+
 .simple-price-note {
   max-width: 860px;
   margin: 22px 0 0;
@@ -3400,54 +3407,9 @@ body {
   margin-top: 92px;
 }
 
-.simple-option-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-
-.simple-option-grid article {
-  min-height: 180px;
-  padding: 28px;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background:
-    linear-gradient(145deg, rgba(245, 242, 235, 0.046), rgba(245, 242, 235, 0.012)),
-    var(--panel);
-}
-
-.simple-option-grid article > span {
-  display: inline-flex;
-  min-height: 30px;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  padding: 0 11px;
-  border: 1px solid rgba(215, 180, 106, 0.45);
-  border-radius: 999px;
-  color: var(--gold);
-  font-size: 13px;
-  font-weight: 850;
-}
-
-.simple-option-grid strong {
-  display: block;
-  margin-bottom: 12px;
-  color: var(--text);
-  font-size: 21px;
-}
-
-.simple-option-grid p {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.72;
-}
-
-.simple-option-quote {
-  border-color: rgba(215, 180, 106, 0.56) !important;
-  background:
-    linear-gradient(145deg, rgba(215, 180, 106, 0.14), rgba(245, 242, 235, 0.018)),
-    var(--panel) !important;
+.simple-option-list {
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
 }
 
 .price-page .education-duration {
@@ -3501,6 +3463,26 @@ body {
   align-items: center;
   gap: 6px;
   padding-bottom: 0;
+}
+
+/* The compact option chips belong only to price.html. */
+.simple-option-section .simple-option-list div {
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 10px;
+  border-color: rgba(215, 180, 106, 0.42);
+  border-radius: 9px;
+  background: rgba(245, 242, 235, 0.04);
+  text-align: center;
+}
+
+.simple-option-section .simple-option-list span {
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.35;
+  text-align: center;
 }
 
 .price-notice {
@@ -3568,9 +3550,10 @@ body {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .simple-option-grid {
-    grid-template-columns: 1fr 1fr;
+  .simple-option-list {
+    grid-template-columns: repeat(3, 1fr);
   }
+
 }
 
 @media (max-width: 700px) {
@@ -3619,12 +3602,17 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .simple-option-grid {
-    grid-template-columns: 1fr;
+  .simple-option-list {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .price-extra-grid div {
     min-height: 102px;
+  }
+
+  .simple-option-section .simple-option-list div {
+    min-height: 42px;
+    padding: 7px 8px;
   }
 
   .price-table thead {
