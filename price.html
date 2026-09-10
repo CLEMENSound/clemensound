@@ -44,9 +44,17 @@
           <div class="price-section-heading">
             <p class="eyebrow">Basic Price</p>
             <h2>서비스 요금 안내</h2>
-            <p>
-              세부 장비, 기사, 이동비, 운영시간과 옵션은 문의 후 견적서로 안내합니다.
-            </p>
+
+					<aside class="price-notice">
+            <ul>
+              <li>표시된 금액은 기본 구성 기준이며 행사 규모와 장소 조건에 따라 달라질 수 있습니다.</li>
+              <li>모든 금액은 "VAT 별도" 기준입니다.</li>
+              <li>정확한 견적을 위해 행사 장소, 예상 인원, 진행 시간과 필요한 마이크 수를 확인합니다.</li>
+              <li>주차비, 통행료, 숙박비와 장거리 출장비가 발생할 경우 추가로 안내합니다.</li>
+              <li>기상 상태, 전력 공급, 장비 반입 동선 등 현장 조건에 따라 추가 장비, 인력, 비용이 추가 될 수 있습니다.</li>
+              <li>야외 행사의 경우 기상 조건에 따라 진행이 불가능할 수 있으며, 장비 손상시 추가 비용이 발생할 수 있습니다.</li>
+            </ul>
+          </aside>
           </div>
 
           <div class="price-table-wrap simple-price-table">
@@ -55,28 +63,44 @@
                 <tr>
                   <th scope="col">서비스</th>
                   <th scope="col">기준금액</th>
+                  <th scope="col">서비스 기준</th>
                 </tr>
               </thead>
               <tbody>
+								<tr>
+                  <td data-label="서비스"><strong>오퍼레이팅</strong></td>
+                  <td data-label="기준금액"><span class="simple-price-value">300,000원 <span class="price-meta"><span class="price-from">부터</span><span class="price-vat-pill">VAT 별도</span></span></span></td>
+                  <td data-label="서비스 기준"><button type="button" class="price-detail-button" data-price-detail="operating">기준 보기</button></td>
+                </tr>
                 <tr>
                   <td data-label="서비스"><strong>소규모 행사</strong></td>
+                  <td data-label="기준금액"><span class="simple-price-value">800,000원 <span class="price-meta"><span class="price-from">부터</span><span class="price-vat-pill">VAT 별도</span></span></span></td>
+                  <td data-label="서비스 기준"><button type="button" class="price-detail-button" data-price-detail="small-event">기준 보기</button></td>
+                </tr>
+                <tr>
+                  <td data-label="서비스"><strong>일반 행사 </strong></td>
+                  <td data-label="기준금액"><span class="simple-price-value">1,000,000원 <span class="price-meta"><span class="price-from">부터</span><span class="price-vat-pill">VAT 별도</span></span></span></td>
+                  <td data-label="서비스 기준"><button type="button" class="price-detail-button" data-price-detail="general-event">기준 보기</button></td>
+                </tr>
+                <tr>
+                  <td data-label="서비스"><strong>연극 · 뮤지컬 음향</strong></td>
+                  <td data-label="기준금액"><span class="simple-price-value">2,000,000원 <span class="price-meta"><span class="price-from">부터</span><span class="price-vat-pill">VAT 별도</span></span></span></td>
+                  <td data-label="서비스 기준"><button type="button" class="price-detail-button" data-price-detail="theater-musical">기준 보기</button></td>
+                </tr>
+								<tr>
+                  <td data-label="서비스"><strong>밴드 공연</strong></td>
+                  <td data-label="기준금액"><span class="simple-price-value">2,000,000원 <span class="price-meta"><span class="price-from">부터</span><span class="price-vat-pill">VAT, 악기 별도</span></span></span></td>
+                  <td data-label="서비스 기준"><button type="button" class="price-detail-button" data-price-detail="band-performance">기준 보기</button></td>
+                </tr>
+                <tr>
+                  <td data-label="서비스"><strong>기존 시스템 점검 · 수정 ·  컨설팅</strong></td>
                   <td data-label="기준금액"><span class="simple-price-value">500,000원 <span class="price-meta"><span class="price-from">부터</span><span class="price-vat-pill">VAT 별도</span></span></span></td>
-                </tr>
-                <tr>
-                  <td data-label="서비스"><strong>일반 행사</strong></td>
-                  <td data-label="기준금액"><span class="simple-price-value">700,000원 <span class="price-meta"><span class="price-from">부터</span><span class="price-vat-pill">VAT 별도</span></span></span></td>
-                </tr>
-                <tr>
-                  <td data-label="서비스"><strong>밴드· 공연</strong></td>
-                  <td data-label="기준금액"><span class="simple-price-value">1,000,000원 <span class="price-meta"><span class="price-from">부터</span><span class="price-vat-pill">VAT , 악기 별도</span></span></span></td>
-                </tr>
-                <tr>
-                  <td data-label="서비스"><strong>기존 시스템 점검 및 수정</strong></td>
-                  <td data-label="기준금액"><span class="simple-price-value">200,000원 <span class="price-meta"><span class="price-from">부터</span><span class="price-vat-pill">VAT 별도</span></span></span></td>
+                  <td data-label="서비스 기준"><span class="price-detail-unavailable">상담 후 안내</span></td>
                 </tr>
                 <tr>
                   <td data-label="서비스"><strong>기초 음향 및 장비 운용 교육</strong></td>
-                  <td data-label="기준금액"><span class="simple-price-value">300,000원 <span class="price-meta"><span class="price-from">부터</span><span class="price-vat-pill">VAT 별도</span></span></span></td>
+                  <td data-label="기준금액"><span class="simple-price-value">700,000원 <span class="price-meta"><span class="price-from">부터</span><span class="price-vat-pill">VAT 별도</span></span></span></td>
+                  <td data-label="서비스 기준"><span class="price-detail-unavailable">상담 후 안내</span></td>
                 </tr>
               </tbody>
             </table>
@@ -86,7 +110,7 @@
             <div class="price-section-heading">
               <p class="eyebrow">Options</p>
               <h2 id="option-title">옵션 구성</h2>
-              <p>행사 조건에 따라 아래 옵션 구성을 함께 선택할 수 있습니다.</p>
+              <p>행사 규모와 조건에 따라 아래 옵션 구성이 별도로 추가될 수 있으며 협의 가능합니다.</p>
             </div>
 
             <div class="price-extra-grid simple-option-list">
@@ -101,19 +125,11 @@
               <div><span>라이브 녹음</span></div>
               <div><span>영상 송출</span></div>
               <div><span>서울 외 출장</span></div>
+              <div><span>악기 및 앰프</span></div>
             </div>
 					</section>
 
-          <aside class="price-notice">
-            <h3>견적 안내</h3>
-            <ul>
-              <li>표시된 금액은 기본 구성 기준이며 행사 규모와 장소 조건에 따라 달라질 수 있습니다.</li>
-              <li>모든 금액은 VAT 별도 기준입니다.</li>
-              <li>정확한 견적을 위해 행사 장소, 예상 인원, 진행 시간과 필요한 마이크 수를 확인합니다.</li>
-              <li>주차비, 통행료, 숙박비와 장거리 출장비는 필요한 경우 별도로 안내합니다.</li>
-              <li>기상 상태, 전력 공급, 장비 반입 동선 등 야외 현장 조건에 따라 추가 장비와 비용이 추가 될 수 있습니다.</li>
-            </ul>
-          </aside>
+
 
           <section class="price-cta" aria-label="견적 문의">
             <div>
@@ -128,7 +144,174 @@
 
     <div data-footer></div>
 
+    <div class="price-detail-modal" id="price-detail-modal" hidden>
+      <div class="price-detail-backdrop" data-modal-close aria-hidden="true"></div>
+      <section class="price-detail-dialog" role="dialog" aria-modal="true" aria-labelledby="price-detail-title" tabindex="-1">
+        <button type="button" class="price-detail-close" data-modal-close aria-label="팝업 닫기">&times;</button>
+        <div id="price-detail-content"></div>
+      </section>
+    </div>
+
+    <template id="price-detail-operating">
+      <article class="price-detail-copy">
+        <h2 id="price-detail-title">음향 오퍼레이팅</h2>
+        <p class="price-detail-intro">행사장이나 공연장에 설치된 음향장비를 활용하여 전문적인 현장 운영이 필요한 경우에 적합합니다.</p>
+        <h3>추천 행사</h3>
+        <ul>
+          <li>성당·교회 및 종교시설 행사</li>
+          <li>기업·기관 기념식</li>
+          <li>학교 및 단체 행사</li>
+          <li>공연장·문화시설 행사</li>
+          <li>밴드 공연과 발표회</li>
+        </ul>
+        <h3>서비스 내용</h3>
+        <ul>
+          <li>행사 전 음향 시스템 점검</li>
+          <li>마이크·음원·영상 음향 연결</li>
+          <li>채널별 음량 및 음색 조정</li>
+          <li>하울링과 노이즈 점검</li>
+          <li>리허설 및 사운드 체크</li>
+          <li>순서표·큐시트에 따른 현장 오퍼레이팅</li>
+        </ul>
+        <p class="price-detail-note">※ 행사장에 설치된 장비의 상태와 사용 가능 여부를 사전에 확인해야 합니다. <br>
+					필요한 경우 부족한 마이크, 믹서, 스피커 등의 장비가 추가되어 추가비용이 있을 수 있습니다.</p>
+      </article>
+    </template>
+
+    <template id="price-detail-small-event">
+      <article class="price-detail-copy">
+        <h2 id="price-detail-title">소규모 행사 음향</h2>
+        <p class="price-detail-intro">강연이나 미사, 소규모 기념식처럼 마이크와 배경음악 중심으로 진행되는 행사에 적합합니다.</p>
+        <h3>추천 행사</h3>
+        <ul>
+          <li>강연 및 세미나</li>
+          <li>소규모 기념식</li>
+          <li>미사 및 종교행사</li>
+          <li>토크 및 발표 행사</li>
+          <li>소규모 야외행사</li>
+        </ul>
+        <h3>기본 구성</h3>
+        <ul>
+          <li>메인 스피커 2대</li>
+          <li>유·무선 마이크</li>
+          <li>배경음악 및 영상 음향 재생</li>
+          <li>음향장비 설치 및 철수</li>
+          <li>행사 중 음향 오퍼레이팅</li>
+        </ul>
+      </article>
+    </template>
+
+    <template id="price-detail-general-event">
+      <article class="price-detail-copy">
+        <h2 id="price-detail-title">일반 행사 음향</h2>
+        <p class="price-detail-intro">사회자, 축사, 시상, 영상, 공연 등 여러 순서가 함께 진행되는 행사에 적합합니다.</p>
+        <h3>추천 행사</h3>
+        <ul>
+          <li>기업 및 기관 행사</li>
+          <li>학교 및 단체 행사</li>
+          <li>기념식과 시상식</li>
+          <li>발표회 및 작은 축제</li>
+          <li>성당 및 종교시설 행사</li>
+        </ul>
+        <h3>기본 구성</h3>
+        <ul>
+          <li>행사 규모에 맞는 메인 스피커</li>
+          <li>다수의 유·무선 마이크</li>
+          <li>배경음악·입퇴장 음악·영상 음향 재생</li>
+          <li>필요 시 무대 모니터 구성</li>
+          <li>사전 점검 및 간단한 리허설</li>
+          <li>순서표에 따른 음향 오퍼레이팅</li>
+        </ul>
+      </article>
+    </template>
+
+    <template id="price-detail-band-performance">
+      <article class="price-detail-copy">
+        <h2 id="price-detail-title">밴드·공연 음향</h2>
+        <p class="price-detail-intro">보컬과 악기, 무대 모니터 등 전문적인 음향 시스템과 실시간 믹싱이 필요한 공연에 적합합니다.</p>
+        <h3>추천 행사</h3>
+        <ul>
+          <li>밴드 공연</li>
+          <li>찬양 공연</li>
+          <li>콘서트 및 버스킹</li>
+          <li>음악극</li>
+          <li>악기 및 보컬 발표회</li>
+        </ul>
+        <h3>기본 구성</h3>
+        <ul>
+          <li>보컬 및 악기 마이킹</li>
+          <li>메인 스피커와 무대 모니터</li>
+          <li>공연 전 사운드 체크</li>
+          <li>보컬 이펙트 및 악기별 음색 조정</li>
+          <li>클릭 및 반주 트랙 연결</li>
+          <li>공연 중 실시간 음향 오퍼레이팅</li>
+        </ul>
+        <p class="price-detail-note">※ 공연 음향은 관객 수보다 출연 인원, 악기 구성, 입력 채널과 모니터 수를 기준으로 견적이 산정됩니다.</p>
+      </article>
+    </template>
+
+    <template id="price-detail-theater-musical">
+      <article class="price-detail-copy">
+        <h2 id="price-detail-title">연극·뮤지컬 음향</h2>
+        <p class="price-detail-intro">다수의 출연자와 무선마이크, 장면별 음원 및 효과음 운영이 필요한 공연에 적합합니다.</p>
+        <h3>추천 행사</h3>
+        <ul>
+          <li>연극 및 창작극</li>
+          <li>뮤지컬</li>
+          <li>갈라쇼</li>
+          <li>어린이 공연</li>
+          <li>음원과 대사가 함께 진행되는 무대</li>
+        </ul>
+        <h3>기본 구성</h3>
+        <ul>
+          <li>출연자용 무선마이크 운영</li>
+          <li>장면별 마이크 음량 및 음소거 관리</li>
+          <li>배경음악과 효과음 재생</li>
+          <li>대본 및 큐시트에 따른 진행</li>
+          <li>공연 전 리허설</li>
+          <li>장면별 음향 오퍼레이팅</li>
+        </ul>
+        <p class="price-detail-note">※ 무선마이크 수, 공연시간, 리허설 횟수와 음원 큐의 복잡도에 따라 비용이 달라질 수 있습니다.</p>
+      </article>
+    </template>
+
     <script src="common.js"></script>
     <script src="script.js"></script>
+    <script>
+      (() => {
+        const modal = document.getElementById("price-detail-modal");
+        const dialog = modal.querySelector(".price-detail-dialog");
+        const content = document.getElementById("price-detail-content");
+        let opener = null;
+
+        const closeModal = () => {
+          modal.hidden = true;
+          document.body.classList.remove("price-modal-open");
+          content.replaceChildren();
+          opener?.focus();
+        };
+
+        document.querySelectorAll("[data-price-detail]").forEach((button) => {
+          button.addEventListener("click", () => {
+            const template = document.getElementById(`price-detail-${button.dataset.priceDetail}`);
+            if (!template) return;
+
+            opener = button;
+            content.replaceChildren(template.content.cloneNode(true));
+            modal.hidden = false;
+            document.body.classList.add("price-modal-open");
+            dialog.focus();
+          });
+        });
+
+        modal.querySelectorAll("[data-modal-close]").forEach((button) => {
+          button.addEventListener("click", closeModal);
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && !modal.hidden) closeModal();
+        });
+      })();
+    </script>
   </body>
 </html>

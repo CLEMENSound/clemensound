@@ -1435,11 +1435,30 @@ h2 {
 
 .record-item {
   display: grid;
-  grid-template-columns: max-content minmax(140px, 0.75fr) minmax(220px, 1.25fr) minmax(96px, 0.42fr);
+  grid-template-columns: max-content minmax(0, 1fr);
   gap: clamp(22px, 3vw, 38px);
   align-items: center;
   padding: 30px 0;
   border-bottom: 1px solid var(--line);
+}
+
+.record-info {
+  display: grid;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.record-info > * {
+  margin: 0;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.record-info > *:last-child {
+  border-bottom: 0;
 }
 
 .performance-list {
@@ -1593,14 +1612,27 @@ h2 {
 }
 
 .record-item h3 {
-  margin-bottom: 0;
+  margin: 0;
+  color: var(--text);
   font-size: 24px;
 }
 
 .record-item p {
-  margin-bottom: 0;
+  margin: 0;
   color: var(--muted);
   line-height: 1.72;
+}
+
+.record-item .record-location {
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.record-item .record-work {
+  color: var(--white-soft);
+  font-size: 17px;
+  font-weight: 600;
 }
 
 .record-item .record-period {
@@ -3378,6 +3410,12 @@ body {
   white-space: nowrap;
 }
 
+.price-table th:last-child,
+.price-table td:last-child {
+  width: 132px;
+  text-align: center;
+}
+
 .price-table tr:last-child td {
   border-bottom: 0;
 }
@@ -3390,7 +3428,145 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 7px;
+  color: var(--gold);
+  font-weight: 750;
   white-space: nowrap;
+}
+
+.price-detail-button {
+  min-height: 38px;
+  padding: 8px 15px;
+  border: 1px solid rgba(215, 180, 106, 0.62);
+  border-radius: 999px;
+  background: rgba(215, 180, 106, 0.1);
+  color: var(--gold);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.price-detail-button:hover,
+.price-detail-button:focus-visible {
+  background: var(--gold);
+  color: #111;
+  transform: translateY(-1px);
+}
+
+.price-detail-button:focus-visible,
+.price-detail-close:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.price-detail-unavailable {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+body.price-modal-open {
+  overflow: hidden;
+}
+
+.price-detail-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+}
+
+.price-detail-modal[hidden] {
+  display: none;
+}
+
+.price-detail-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(6px);
+}
+
+.price-detail-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(720px, 100%);
+  max-height: min(820px, calc(100vh - 56px));
+  overflow-y: auto;
+  padding: clamp(28px, 5vw, 48px);
+  border: 1px solid rgba(215, 180, 106, 0.52);
+  border-radius: 18px;
+  background:
+    linear-gradient(145deg, rgba(215, 180, 106, 0.1), transparent 34%),
+    var(--panel);
+  color: var(--text);
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.62);
+}
+
+.price-detail-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.price-detail-close:hover {
+  color: var(--gold);
+}
+
+.price-detail-copy h2 {
+  margin: 0 44px 16px 0;
+  color: var(--gold);
+  font-size: clamp(28px, 5vw, 40px);
+  line-height: 1.25;
+}
+
+.price-detail-copy h3 {
+  margin: 30px 0 12px;
+  font-size: 19px;
+}
+
+.price-detail-copy p,
+.price-detail-copy li {
+  color: var(--white-soft);
+  line-height: 1.75;
+}
+
+.price-detail-copy ul {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.price-detail-copy li {
+  margin-bottom: 5px;
+}
+
+.price-detail-intro {
+  margin-bottom: 0;
+  color: var(--muted) !important;
+  font-size: 16px;
+}
+
+.price-detail-note {
+  margin: 30px 0 0;
+  padding: 18px 20px;
+  border-left: 3px solid var(--gold);
+  background: rgba(245, 242, 235, 0.05);
+  color: var(--muted) !important;
+  font-size: 14px;
 }
 
 .simple-price-note {
@@ -3650,6 +3826,22 @@ body {
     font-size: 13px;
     font-weight: 650;
     content: attr(data-label);
+  }
+
+  .price-table th:last-child,
+  .price-table td:last-child {
+    width: 100%;
+    text-align: left;
+  }
+
+  .price-detail-modal {
+    padding: 14px;
+  }
+
+  .price-detail-dialog {
+    max-height: calc(100vh - 28px);
+    padding: 30px 22px;
+    border-radius: 14px;
   }
 
   .price-notice {
